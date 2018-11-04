@@ -1,4 +1,5 @@
 @import 'partials/fonts';
+@import 'partials/colors';
 
 #loader {
   transition: all 0.3s ease-in-out;
@@ -50,4 +51,28 @@
 body {
   font-family: $fontMain;
   font-size: 14px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  #wrapper {
+    position: relative;
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: minmax(min-content, max-content);
+  }
+}
+
+#header-wrapper {
+  color: #fff;
+  display: grid;
+  grid-template-columns: 250px auto;
+  #logo-wrap {
+    background: $primaryColor;
+    padding: 9px;
+    h1,h2,h3,h4,h5 {
+      margin: 0;
+    }
+  }
 }
