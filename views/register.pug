@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    .container
+        .row
+            .col-sm-6.col-sm-offset-3
+                #login-form
+                    h2= title
+                    form(action="/register", method="POST")
+                        .control-row
+                            label(for="name") Full Name
+                            input(type="text", placeholder="Full Name", Name="name")                        
+                        .control-row
+                            label(for="email") Email
+                            input(type="text", placeholder="Email", name="email")
+                        .control-row
+                            label(for="password") Password
+                            input(type="password", placeholder="Password", name="password")
+                        .control-row
+                            label(for="confirm-password") Confirm Password
+                            input(type="password", placeholder="Password", name="confirm-password")
+                        input(type="submit", value="Register")
+                ul.list-inline
+                    li
+                        a(href="/login") Login
+                    

@@ -1,0 +1,50 @@
+doctype html
+html
+	head
+		title= `${title || 'Error'} | Portal`
+
+		//- Fonts
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+
+		//- Page specific styles
+		if styles
+			each style in styles
+				link(rel="stylesheet", href=style)
+
+		link(rel='stylesheet', href='/dist/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/dist/css/global.min.css')
+
+	body
+		#loader
+			.spinner
+		script.
+			window.addEventListener('load', () => {
+				const loader = document.getElementById('loader');
+				setTimeout(() => {
+				loader.classList.add('fadeOut');
+				}, 300);
+			});
+		#wrapper
+			#header-wrapper
+				#logo
+					h3 PORTAL
+				#header-highlights
+							
+			#content-wrapper
+				block messages
+					if locals.flashes
+						#toast-wrap
+							.container
+								.row
+									.col-sm
+										- categories = Object.keys(locals.flashes)
+											each category in categories
+												each message in locals.flashes[category]
+													div(class=`toast toast-${category}`)
+														._message #{message}
+														span.closeToast
+															i.ti-close
+				block content
+
+		//- script(src='/dist/js/bootstrap.min.js')
+		script(src='/dist/js/portalscripts.bundle.js')
