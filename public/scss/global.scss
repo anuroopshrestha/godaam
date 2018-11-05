@@ -1,5 +1,6 @@
 @import 'partials/fonts';
 @import 'partials/colors';
+@import 'partials/vars';
 
 #loader {
   transition: all 0.3s ease-in-out;
@@ -48,8 +49,13 @@
   }
 }
 
+#toast-wrap {
+  position: absolute;
+}
+
 body {
-  font-family: $fontMain;
+  font-family: $fontBody;
+  font-weight: 400;
   font-size: 14px;
   position: absolute;
   left: 0;
@@ -67,12 +73,127 @@ body {
 #header-wrapper {
   color: #fff;
   display: grid;
-  grid-template-columns: 250px auto;
+  grid-template-columns: minmax(min-content, max-content) auto;
   #logo-wrap {
     background: $primaryColor;
-    padding: 9px;
+    width: $sidebarOpenWidth;
+    transition: all .3s ease;
     h1,h2,h3,h4,h5 {
       margin: 0;
+    }
+    > div {
+      position: absolute;
+      left: 15px;
+      top: 0;
+    }
+    #small {
+      opacity: 1;
+      visibility: visible;
+      transition: all .2s ease .3s;
+    }
+    #big {
+      opacity: 1;
+      visibility: visible;
+      transition: all .2s ease .3s;
+    }
+  }
+  #header-info {
+    color: $primaryColor;
+    #menu-clicker {
+      display: inline-block;
+      font-size: 18px;
+      padding: 12px;
+      line-height: 0;
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+#content-wrapper {
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) auto;
+}
+
+#sidebar-wrap {
+  background: $primaryColor;
+  width: $sidebarOpenWidth;
+  color: #fff;
+  transition: all .3s ease;
+  ul {
+    margin: 0;
+    padding: 0;
+    li {
+      a {
+        display: block;
+        padding: 9px 15px;
+        color: darken(#fff, 12);
+        position: relative;
+        font-size: 0.9em;
+        &:hover {
+          text-decoration: none;
+          background: lighten($primaryColor, 15);
+          color: #fff;
+        }
+        &:after {
+          position: absolute;
+          content: '';
+          width: 2px;
+          height: 100%;
+          background: lighten($primaryColor, 60);
+          top: 0;
+          left: 0;
+          display: none;
+        }
+        ._txt {
+          padding-left: 15px;
+          transition: all .2s ease .3s;
+        }
+      }
+      &.active {
+        a {
+          &:after {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+}
+
+body {
+  &.menu-closed {
+    #header-wrapper {
+      #logo-wrap {
+        width: $sidebarClosedWidth;
+        transition: all .3s ease .2s;
+        #small {
+          opacity: 1;
+          visibility: visible;
+          transition: all .2s ease;
+        }
+        #big {
+          opacity: 0;
+          visibility: hidden;
+          transition: all .2s ease;
+        }
+      }
+    }
+    #sidebar-wrap {
+      width: $sidebarClosedWidth;
+      transition: all .3s ease .2s;
+      ul {
+        li {
+          a {
+            ._txt {
+              opacity: 0;
+              visibility: hidden;
+              transition: all .2s ease;
+            }
+          }
+        }
+      }
     }
   }
 }

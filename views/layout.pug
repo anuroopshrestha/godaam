@@ -4,13 +4,15 @@ html
 		title= `${title || 'Error'} | Portal`
 
 		//- Fonts
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+		//- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500" rel="stylesheet">
 
 		//- Page specific styles
 		if styles
 			each style in styles
 				link(rel="stylesheet", href=style)
 
+		link(rel='stylesheet', href='/dist/css/themify-icons.css')
 		link(rel='stylesheet', href='/dist/css/bootstrap.min.css')
 		link(rel='stylesheet', href='/dist/css/global.min.css')
 
@@ -27,24 +29,58 @@ html
 		#wrapper
 			#header-wrapper
 				#logo-wrap
-					h5 PORTAL
+					#small
+						h3 p
+					#big
+						h3 portal
 				#header-info
+					#menu-clicker
+						span.ti-menu
 							
+			block messages
+				if locals.flashes
+					#toast-wrap
+						.container
+							.row
+								.col-sm
+									- categories = Object.keys(locals.flashes)
+										each category in categories
+											each message in locals.flashes[category]
+												div(class=`toast toast-${category}`)
+													._message #{message}
+													span.closeToast
+														i.ti-close
 			#content-wrapper
-				block messages
-					if locals.flashes
-						#toast-wrap
-							.container
-								.row
-									.col-sm
-										- categories = Object.keys(locals.flashes)
-											each category in categories
-												each message in locals.flashes[category]
-													div(class=`toast toast-${category}`)
-														._message #{message}
-														span.closeToast
-															i.ti-close
-				block content
+				block sidebar
+					#sidebar-wrap
+						ul
+							li.active
+								a(href="#")
+									span.ti-book
+									span._txt Catalog
+							li
+								a(href="#")
+									span.ti-control-shuffle
+									span._txt Transactions
+							li
+								a(href="#")
+									span.ti-map
+									span._txt Locations
+							li
+								a(href="#")
+									span.ti-package
+									span._txt Brands
+							li
+								a(href="#")
+									span.ti-stats-up
+									span._txt Reports
+							li
+								a(href="#")
+									span.ti-user
+									span._txt Users
+							
+					#content-inner
+						block content
 
 		//- script(src='/dist/js/bootstrap.min.js')
 		script(src='/dist/js/portalscripts.bundle.js')
