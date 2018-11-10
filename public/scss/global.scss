@@ -1,6 +1,7 @@
 @import 'partials/fonts';
 @import 'partials/colors';
 @import 'partials/vars';
+@import 'partials/layout';
 
 #loader {
   transition: all 0.3s ease-in-out;
@@ -114,6 +115,10 @@ body {
 #content-wrapper {
   display: grid;
   grid-template-columns: minmax(min-content, max-content) auto;
+  #content-inner {
+    padding: 12px;
+    background: $lightBlack;
+  }
 }
 
 #sidebar-wrap {
@@ -150,11 +155,37 @@ body {
           padding-left: 15px;
           transition: all .2s ease .3s;
         }
+        .submenuopen {
+          transition: all .2s ease .3s;
+        }
+        &.withChild {
+          .submenuopen {
+            float: right;
+            top: 6px;
+            position: relative;
+            font-size: 0.8em;
+          }
+        }
       }
       &.active {
         a {
           &:after {
             display: block;
+          }
+        }
+      }
+      .submenu {
+        overflow: hidden;
+        max-height: 0;
+        transition: all .3s ease;
+        &.open {
+          max-height: 300px;
+          transition: all .3s ease;
+        }
+        li {
+          a {
+            padding: 3px 15px 3px 42px;
+            font-size: 0.8em;
           }
         }
       }
@@ -186,11 +217,16 @@ body {
       ul {
         li {
           a {
-            ._txt {
+            ._txt, .submenuopen {
               opacity: 0;
               visibility: hidden;
               transition: all .2s ease;
             }
+          }
+          .submenu {
+            opacity: 0;
+            visibility: hidden;
+            transition: all .2s ease;
           }
         }
       }

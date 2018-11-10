@@ -1,0 +1,11 @@
+@import 'vars';
+
+.card-row {
+  display: grid;
+  grid-column-gap: $layoutGutterWidth;
+  grid-template-columns: 1fr 1fr 1fr;
+  .card {
+    background: #fff;
+    min-height: 240px;
+  }
+}

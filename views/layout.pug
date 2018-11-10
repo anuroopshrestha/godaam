@@ -30,9 +30,9 @@ html
 			#header-wrapper
 				#logo-wrap
 					#small
-						h3 p
+						h2 p
 					#big
-						h3 portal
+						h2 portal
 				#header-info
 					#menu-clicker
 						span.ti-menu
@@ -56,8 +56,20 @@ html
 						ul
 							li.active
 								a(href="#")
+									span.ti-home
+									span._txt Dashboard
+							li
+								a.withChild(href="#")
 									span.ti-book
 									span._txt Catalog
+									span.ti-angle-down.submenuopen
+								ul.submenu
+									li
+										a(href="#") Add New
+									li
+										a(href="#") Categories
+									li
+										a(href="#") View All
 							li
 								a(href="#")
 									span.ti-control-shuffle
@@ -78,6 +90,10 @@ html
 								a(href="#")
 									span.ti-user
 									span._txt Users
+							li
+								a(href="#")
+									span.ti-search
+									span._txt Search
 							
 					#content-inner
 						block content
