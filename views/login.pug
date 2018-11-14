@@ -4,16 +4,12 @@ block content
 	#login_wrapper
 		block messages
 			if locals.flashes
-				#toast-wrap(style="margin-top: 15px;position: absolute;top: 0;left: 30px;right: 30px;")
-					.row
-						.col-sm
-							- categories = Object.keys(locals.flashes)
-								each category in categories
-									each message in locals.flashes[category]
-										div(class=`toast toast-${category}`)
-											._message #{message}
-											span.closeToast
-												i.ti-close
+				#toast-wrap
+					- categories = Object.keys(locals.flashes)
+						each category in categories
+							each message in locals.flashes[category]
+								div(class=`toast bg-${category}`)
+									._message #{message}
 		#login-form
 			h2= title
 			#login-inner
@@ -23,7 +19,7 @@ block content
 					.control-row
 						input(type="password", placeholder="Password", name="password", required)
 					.control-row
-						input.btn.btn-primary(type="submit", value="Login")
+						button.btn.btn-primary Login
 				//- ul.list-inline
 				//- 	li.list-inline-item
 				//- 		a(href="#") Forgot Password

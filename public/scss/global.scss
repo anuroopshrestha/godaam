@@ -50,10 +50,6 @@
   }
 }
 
-#toast-wrap {
-  position: absolute;
-}
-
 body {
   font-family: $fontBody;
   font-weight: 400;
@@ -73,6 +69,7 @@ body {
 
 #header-wrapper {
   color: #fff;
+  height: 42px;
   display: grid;
   grid-template-columns: minmax(min-content, max-content) auto;
   #logo-wrap {
@@ -100,6 +97,11 @@ body {
   }
   #header-info {
     color: $primaryColor;
+    position: fixed;
+    left: $sidebarOpenWidth;
+    background: #fff;
+    right: 0;
+    transition: all .3s ease;
     #menu-clicker {
       display: inline-block;
       font-size: 18px;
@@ -107,6 +109,65 @@ body {
       line-height: 0;
       span {
         cursor: pointer;
+      }
+    }
+    #user-info {
+      float: right;
+      padding-top: 8px;
+      margin-right: 9px;
+      cursor: pointer;
+      height: 42px;
+      position: relative;
+      ._pic {
+        display: inline-block;
+        width: 27px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin-right: 6px;
+      }
+      .user-menu {
+        display: inline-block;
+        vertical-align: top;
+        padding-top: 3px;
+        ._down {
+          font-size: 0.7em;
+          top: 1px;
+          position: relative;
+          padding-left: 3px;
+          display: inline-block;
+        }
+        ._submenu {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          top: 34px;
+          left: 0;
+          right: 0;
+          padding: 6px;
+          background: #fff;
+          opacity: 0;
+          visibility: hidden;
+          transition: all .3s ease;
+          li {
+            a {
+              font-size: 0.9em;
+              color: #333;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+      &:hover {
+        .user-menu {
+          ._submenu {
+            opacity: 1;
+            visibility: visible;
+            transition: all .3s ease;
+          }
+        }
       }
     }
   }
@@ -129,6 +190,8 @@ body {
   ul {
     margin: 0;
     padding: 0;
+    position: sticky;
+    top: 0;
     li {
       a {
         display: block;
@@ -152,6 +215,7 @@ body {
           display: none;
         }
         ._txt {
+          position: absolute;
           padding-left: 15px;
           transition: all .2s ease .3s;
         }
@@ -209,6 +273,10 @@ body {
           visibility: hidden;
           transition: all .2s ease;
         }
+      }
+      #header-info {
+        left: $sidebarClosedWidth;
+        transition: all .3s ease .2s;
       }
     }
     #sidebar-wrap {

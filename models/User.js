@@ -56,6 +56,16 @@ userSchema.pre('save', async function(next) {
   next();
 });
 
+// https://github.com/saintedlama/passport-local-mongoose/issues/218
+userSchema.statics.registerAsync = function (data, password) {
+  return new Promise((resolve, reject) => {
+    this.register(data, password, (err, user) => {
+      if (err) return reject(err);
+      resolve(user);
+    });
+  });
+};
+
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 userSchema.plugin(mongodbErrorHandler);
 

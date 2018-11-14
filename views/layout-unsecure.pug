@@ -1,0 +1,86 @@
+doctype html
+html
+  head
+  title= `${title} | Portal`
+
+  link(href="https://fonts.googleapis.com/css?family=Hind:300,700|Quicksand", rel="stylesheet")
+  link(rel="stylesheet", href="/dist/css/portal.min.css")
+
+  style.
+    body {
+      left: 0 !important;
+      font-family: "Hind", sans-serif;
+    }
+    h1,h2,h3,h4,h5,h6 {
+      font-family: "Quicksand", sans-serif;
+    }
+    #page-back {
+      position: fixed;
+      z-index: -1;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      width: calc(100% - 340px);
+      background-size: cover !important;
+      background-position: center !important;
+    }
+    #login_wrapper {
+      background: #fff;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding: 0 30px;
+      display: flex;
+      align-items: center;
+    }
+    .control-row {
+      margin-bottom: 6px;
+    }
+    input[type="text"], input[type="password"] {
+      padding: 3px 12px;
+      width: 280px;
+    }
+    // Autocomplete styles
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus
+    input:-webkit-autofill, 
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover
+    textarea:-webkit-autofill:focus,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:focus {
+      border: 1px solid darkgrey;
+    }
+    #toast-wrap {
+      margin-top: 15px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    #toast-wrap .toast {
+      width: 100%;
+      border-radius: 0;
+    }
+    #natgeo {
+      position: absolute;
+      bottom: 2px;
+      left: 9px;
+    }
+    #natgeo a {
+      color: #fff;
+      text-shadow: 0 0 4px #000;
+    }
+
+  body
+    #wrapper
+      #header-wrapper
+      #page-back(style=`background: url("${background}")`)
+      #natgeo
+        a(href="https://www.nationalgeographic.com/photography/photo-of-the-day/" target="_blank")
+          | Photo of the Day
+      #content-wrapper
+        block content

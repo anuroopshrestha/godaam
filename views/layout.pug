@@ -13,7 +13,7 @@ html
 				link(rel="stylesheet", href=style)
 
 		link(rel='stylesheet', href='/dist/css/themify-icons.css')
-		link(rel='stylesheet', href='/dist/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/dist/css/portal.min.css')
 		link(rel='stylesheet', href='/dist/css/global.min.css')
 
 	body
@@ -36,20 +36,28 @@ html
 				#header-info
 					#menu-clicker
 						span.ti-menu
+					if locals.user
+						#user-info
+							._pic
+								img(src="/static/images/user.jpg", alt="")
+							.user-menu
+								- const firstName = locals.user.name.split(' ')[0]
+								span #{firstName}
+								span.ti-angle-down._down
+								ul._submenu
+									li
+										a(href="/user/profile") Edit
+									li
+										a(href="/logout") Logout
 							
 			block messages
 				if locals.flashes
 					#toast-wrap
-						.container
-							.row
-								.col-sm
-									- categories = Object.keys(locals.flashes)
-										each category in categories
-											each message in locals.flashes[category]
-												div(class=`toast toast-${category}`)
-													._message #{message}
-													span.closeToast
-														i.ti-close
+						- categories = Object.keys(locals.flashes)
+							each category in categories
+								each message in locals.flashes[category]
+									div(class=`toast bg-${category}`)
+										._message #{message}
 			#content-wrapper
 				block sidebar
 					#sidebar-wrap
@@ -75,9 +83,15 @@ html
 									span.ti-control-shuffle
 									span._txt Transactions
 							li
-								a(href="#")
+								a.withChild(href="#")
 									span.ti-map
 									span._txt Locations
+									span.ti-angle-down.submenuopen
+								ul.submenu
+									li
+										a(href="#") Add New
+									li
+										a(href="#") View All
 							li
 								a(href="#")
 									span.ti-package

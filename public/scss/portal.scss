@@ -1,0 +1,32 @@
+@import 'bootstrap/functions';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+@import 'bootstrap/reboot';
+@import 'bootstrap/buttons';
+
+img {
+  max-width: 100%;
+}
+
+#toast-wrap {
+  position: absolute;
+  width: 100%;
+  .toast {
+    width: 450px;
+    background: $blue;
+    margin: 9px auto;
+    color: #fff;
+    padding: 3px 15px;
+    border-radius: 3px;
+    position: relative;
+    top: 42px;
+    text-align: center;
+    cursor: pointer;
+    &.bg-danger, &.bg-error {
+      background: $red;
+    }
+    &.bg-info {
+      background: $blue;
+    }
+  }
+}
