@@ -1,11 +1,58 @@
 @import 'vars';
+@import 'colors';
+
+:focus {
+  outline: none;
+}
 
 .card-row {
   display: grid;
   grid-column-gap: $layoutGutterWidth;
-  grid-template-columns: 1fr 1fr 1fr;
   .card {
     background: #fff;
-    min-height: 240px;
+    padding: 9px;
+    .card-title {
+      border-bottom: 1px solid lighten($color: #000000, $amount: 90);
+      margin-bottom: 9px;
+      padding-bottom: 9px;
+    }
+  }
+}
+
+.grid-aside {
+  grid-template-columns: 2fr 1fr;
+}
+
+.grid-half-half {
+  grid-template-columns: 1fr 1fr;
+}
+
+input:not([type="file"]), select, textarea {
+  height: 39px;
+  padding: 0 9px;
+  border: 1px solid lighten($color: #000000, $amount: 80);
+  &:focus {
+    border: 1px solid lighten($primaryColor, $amount: 40);
+  }
+}
+
+form {
+  label {
+    margin: 0;
+  }
+  .control-row {
+    margin-bottom: 9px;
+    * {
+      width: 100%;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &.columned {
+    .control-row {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+    }
   }
 }

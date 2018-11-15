@@ -47,3 +47,26 @@ exports.register = async (req, res, next) => {
   await User.registerAsync(user, req.body.password);
   next(); // pass to authController.login
 };
+
+exports.usersPage = async (req, res) => {
+  try {
+    const users = await User.find({
+      role: { $eq: 1 }
+    });
+    res.render('users/all', { title: 'Users', users });
+  } catch (e) {
+    console.log(e);
+    req.flash('error', 'An unexpected error has occurred. Please try again');
+    res.redirect('/');
+  }
+};
+
+exports.addNewUser = (req, res) => {
+  try {
+    res.render('users/new', { title: 'Add New User' });
+  } catch (e) {
+    console.log(e);
+    req.flash('error', 'An unexpected error has occurred. Please try again');
+    res.redirect('/');
+  }
+};

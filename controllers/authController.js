@@ -14,9 +14,9 @@ exports.login = passport.authenticate('local', {
   successFlash: 'You are now logged in!'
 });
 
-exports.checkAdmin = (req, res) => {
-  if (req.user.role <= 10) {
-    res.redirect('/');
+exports.checkAdmin = (req, res, next) => {
+  if (req.user.role === 0) {
+    next();
   } else {
     req.logout();
     req.flash('error', 'You don\'t have enough privileges.');

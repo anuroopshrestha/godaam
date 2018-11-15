@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  .page-title
+    h1 Categories
+  .card-row.grid-aside
+    .card
+      .card-title All Categories
+    .card
+      .card-title Add New
+      ._main
+        form.stacked(action="")
+          .control-row
+            label(for="name") Name
+            input#name(type="text" name="name")
+          .control-row
+            label(for="parent") Parent
+            select#parent(name="parent")
+              option(value="") 1
+              option(value="") 1
+              option(value="") 1
+          .control-row
+            label(for="image") Picture
+            input#image(type="file" name="image")
+          .control-row
+            label(for="order") Order
+            input#order(type="number" min="0" name="order")

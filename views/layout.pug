@@ -63,7 +63,7 @@ html
 					#sidebar-wrap
 						ul
 							li.active
-								a(href="#")
+								a(href="/")
 									span.ti-home
 									span._txt Dashboard
 							li
@@ -93,6 +93,10 @@ html
 									li
 										a(href="#") View All
 							li
+								a(href="/editors")
+									span.ti-id-badge
+									span._txt Editors
+							li
 								a(href="#")
 									span.ti-package
 									span._txt Brands
@@ -100,10 +104,17 @@ html
 								a(href="#")
 									span.ti-stats-up
 									span._txt Reports
-							li
-								a(href="#")
-									span.ti-user
-									span._txt Users
+							if user.role == 0
+								li
+									a.withChild(href="#")
+										span.ti-user
+										span._txt Users
+										span.ti-angle-down.submenuopen
+									ul.submenu
+										li
+											a(href="/users") View All
+										li
+											a(href="/users/new") Add New
 							li
 								a(href="#")
 									span.ti-search

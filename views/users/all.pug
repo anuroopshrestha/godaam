@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  .page-title
+    h1 Users
+  .card-row
+    .card
+      .card-title All Users
+      if users.length < 1
+        p No users found
+      else
+        table
+          tr
+            th S. No.
+            th Name
+            th Store
+            th Email

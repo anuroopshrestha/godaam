@@ -25,6 +25,26 @@ const userSchema = new Schema({
     type: Number,
     default: 50
   },
+  store: {
+    name: {
+      type: String,
+      required: 'Store name must be applied'
+    },
+    location: {
+      type: {
+        type: String,
+        default: 'Point'
+      },
+      coordinates: [{
+        type: Number,
+        required: 'You must supply coordinates!'
+      }],
+      address: {
+        type: String,
+        required: 'You must supply an address!'
+      }
+    }
+  },
   resetPassword: {
     token: String,
     expires: Date
