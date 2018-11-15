@@ -7,11 +7,6 @@ html
 		//- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500" rel="stylesheet">
 
-		//- Page specific styles
-		if styles
-			each style in styles
-				link(rel="stylesheet", href=style)
-
 		link(rel='stylesheet', href='/dist/css/themify-icons.css')
 		link(rel='stylesheet', href='/dist/css/portal.min.css')
 		link(rel='stylesheet', href='/dist/css/global.min.css')
@@ -125,3 +120,4 @@ html
 
 		//- script(src='/dist/js/bootstrap.min.js')
 		script(src='/dist/js/portalscripts.bundle.js')
+		block scripts

@@ -1,5 +1,8 @@
 const $ = require('jquery');
 const cookie = require('js-cookie');
+// const autocomplete = require('./modules/autocomplete');
+
+// autocomplete($('#address'), $('#lat'), $('#lng'));
 
 const removeToasts = () => {
   $('.toast').fadeOut(300, 'swing', () => {

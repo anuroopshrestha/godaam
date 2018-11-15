@@ -302,7 +302,12 @@ body {
   }
 }
 
-
+#map-wrap {
+  height: 350px;
+  #map {
+    height: 100%;
+  }
+}
 
 
 
