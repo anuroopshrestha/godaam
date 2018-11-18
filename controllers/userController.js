@@ -24,15 +24,15 @@ exports.validateRegister = (req, res, next) => {
   req.sanitizeBody('name');
   req.checkBody('name', 'You must supply a name!').notEmpty();
   req.checkBody('email', 'That Email is not valid!').isEmail();
-  req.sanitizeBody('email').normalizeEmail({
-    remove_dots: false,
-    remove_extension: false,
-    gmail_remove_subaddress: false
-  });
+  // req.sanitizeBody('email').normalizeEmail({
+  //   remove_dots: false,
+  //   remove_extension: false,
+  //   gmail_remove_subaddress: false
+  // });
   req.checkBody('store.name', 'Store name is empty').notEmpty();
   req.checkBody('store.location.address', 'Store address is empty').notEmpty();
-  req.checkBody('store.locations.coordinates[0]', 'Longitude is empty').notEmpty();
-  req.checkBody('store.locations.coordinates[1]', 'Lattitude is empty').notEmpty();
+  req.checkBody('store.location.coordinates[0]', 'Longitude is empty').notEmpty();
+  req.checkBody('store.location.coordinates[1]', 'Lattitude is empty').notEmpty();
   req.checkBody('password', 'Password Cannot be Blank!').notEmpty();
   req.checkBody('confirm-password', 'Confirmed Password cannot be blank!').notEmpty();
   req.checkBody('confirm-password', 'Oops! Your passwords do not match').equals(req.body.password);
@@ -57,8 +57,11 @@ exports.registerUser = async (req, res) => {
       filename: 'login-details',
       subject: 'Your login details',
       username: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      url: '/login' // TODO dynamic url
     });
+    req.flash('info', 'New user has been added');
+    res.redirect('/users');
   } catch (e) {
     console.log(e);
     req.flash('error', 'An unexpected error occurred. Please try again.');
