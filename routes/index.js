@@ -14,16 +14,11 @@ router.get('/logout', authController.logout);
 // USERS
 // -- REGISTER ADMIN
 router.get('/register', userController.registerForm);
-router.post(
-  '/register',
-  userController.validateRegister,
-  userController.register,
-  authController.login
-);
 
 // -- STORE ADMINS
 router.get('/users', authController.checkAdmin, userController.usersPage);
-router.get('/users/new', authController.checkAdmin, userController.addNewUser);
+router.get('/users/new', authController.checkAdmin, userController.addNewUserPage);
+router.post('/users/new', authController.checkAdmin, userController.validateRegister, userController.registerUser);
 
 router.get(
   '/',

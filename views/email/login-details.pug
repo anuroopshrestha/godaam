@@ -1,0 +1,16 @@
+extends email-layout
+
+block content
+  h2 Login Information
+  p Hello, your account has been created with the following credentials:
+  table
+    tr
+      th Username: 
+      td #{username} 
+    tr
+      th Password: 
+      td #{password} 
+  br
+  p 
+    | To login click here: 
+    a(href=url) LOGIN

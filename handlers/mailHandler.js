@@ -25,23 +25,8 @@ exports.send = async (options) => {
   const text = htmlToText.fromString(html);
 
   const mailOptions = {
-    from: 'Tilicho <info@tilichokala.com>',
+    from: 'Portal <info@wearemanda.com>',
     to: options.user.email,
-    subject: options.subject,
-    html,
-    text
-  };
-  const sendMail = promisify(transport.sendMail, transport);
-  return sendMail(mailOptions);
-};
-
-exports.sendMail = async (options) => {
-  const html = generateHTML(options.filename, options);
-  const text = htmlToText.fromString(html);
-
-  const mailOptions = {
-    from: 'Tilicho <info@tilichokala.com>',
-    to: options.email,
     subject: options.subject,
     html,
     text
