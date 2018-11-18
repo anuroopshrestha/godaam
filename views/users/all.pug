@@ -9,9 +9,35 @@ block content
       if users.length < 1
         p No users found
       else
-        table
+        table.striped
           tr
             th S. No.
             th Name
             th Store
+            th Location
             th Email
+          each user, i in users
+            tr
+              td #{i+1}
+              td #{user.name}
+              td #{user.store.name}
+              td #{user.store.location.address}
+              td #{user.email}
+            tr
+              td #{i+1}
+              td #{user.name}
+              td #{user.store.name}
+              td #{user.store.location.address}
+              td #{user.email}
+            tr
+              td #{i+1}
+              td #{user.name}
+              td #{user.store.name}
+              td #{user.store.location.address}
+              td #{user.email}
+            tr
+              td #{i+1}
+              td #{user.name}
+              td #{user.store.name}
+              td #{user.store.location.address}
+              td #{user.email}
