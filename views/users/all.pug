@@ -13,6 +13,7 @@ block content
           tr
             th S. No.
             th Name
+            th
             th Store
             th Location
             th Email
@@ -20,24 +21,60 @@ block content
             tr
               td #{i+1}
               td #{user.name}
+              td
+                span.edit-cell
+                  ul.list-inline
+                    li
+                      a(href=`/user/${user._id}` title="Edit")
+                        span.ti-pencil
+                    li
+                      a(href=`/user/del/${user._id}` title="Delete")
+                        span.ti-trash
               td #{user.store.name}
               td #{user.store.location.address}
               td #{user.email}
             tr
               td #{i+1}
               td #{user.name}
+              td
+                span.edit-cell
+                  ul.list-inline
+                    li
+                      a(href=`/user/${user._id}` title="Edit")
+                        span.ti-pencil
+                    li
+                      a(href=`/user/del/${user._id}` title="Delete")
+                        span.ti-trash
               td #{user.store.name}
               td #{user.store.location.address}
               td #{user.email}
             tr
               td #{i+1}
               td #{user.name}
+              td
+                span.edit-cell
+                  ul.list-inline
+                    li
+                      a(href=`/user/${user._id}` title="Edit")
+                        span.ti-pencil
+                    li
+                      a(href=`/user/del/${user._id}` title="Delete")
+                        span.ti-trash
               td #{user.store.name}
               td #{user.store.location.address}
               td #{user.email}
             tr
               td #{i+1}
               td #{user.name}
+              td
+                span.edit-cell
+                  ul.list-inline
+                    li
+                      a(href=`/user/${user._id}` title="Edit")
+                        span.ti-pencil
+                    li
+                      a(href=`/user/del/${user._id}` title="Delete")
+                        span.ti-trash
               td #{user.store.name}
               td #{user.store.location.address}
               td #{user.email}

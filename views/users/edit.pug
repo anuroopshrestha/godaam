@@ -1,0 +1,108 @@
+extends ../layout
+
+block content
+  .page-title
+    h1 #{title}
+    form.columned(action=`/user/${editUser._id}` method="POST")
+      .card-row.grid-half-half
+        .card
+          .card-title Store Information
+          .control-row
+            label(for="store-name") Store Name
+            input#store-name(type="text" name="store[name]" required value=editUser.store.name)
+          .control-row
+            label(for="address") Address
+            input#address(type="text" name="store[location][address]" autocomplete="off" required value=editUser.store.location.address)
+          .control-row
+            label(for="lng") Longitude
+            input#lng(type="text" name="store[location][coordinates][0]" required value=editUser.store.location.coordinates[0])
+          .control-row
+            label(for="lat") Lattitude
+            input#lat(type="text" name="store[location][coordinates][1]" required value=editUser.store.location.coordinates[1])
+          #map-wrap
+            #map
+        .card
+          .card-title User Information
+          .control-row
+            label(for="name") Full Name
+            input#text(type="text" name="name" required value=editUser.name)
+          .control-row
+            label(for="email") Email Address
+            input#email(type="email" name="email" required value=editUser.email)
+          .control-row
+            div
+              label(for="password") Password
+              p.small Leave blank to keep password unchanged
+            input#password(type="password" name="password")
+          .control-row
+            label(for="confirm-password") Confirm Password
+            input#confirm-password(type="password", name="confirm-password")
+      br
+      button.btn.btn-primary Submit
+  script.
+    function initMap() {
+      console.log('init map');
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: new google.maps.LatLng(#{editUser.store.location.coordinates[1]}, #{editUser.store.location.coordinates[0]}),
+        zoom: 13
+      });
+      var input = document.getElementById('address');
+      var latInput = document.getElementById('lat');
+      var lngInput = document.getElementById('lng');
+
+      var autocomplete = new google.maps.places.Autocomplete(input);
+
+      // Bind the map's bounds (viewport) property to the autocomplete object,
+      // so that the autocomplete requests use the current map bounds for the
+      // bounds option in the request.
+      autocomplete.bindTo('bounds', map);
+
+      // Set the data fields to return when the user selects a place.
+      autocomplete.setFields(
+          ['address_components', 'geometry', 'icon', 'name']);
+
+      var infowindow = new google.maps.InfoWindow();
+      var infowindowContent = document.getElementById('infowindow-content');
+      infowindow.setContent(infowindowContent);
+      var marker = new google.maps.Marker({
+        map: map,
+        anchorPoint: new google.maps.Point(0, -29)
+      });
+
+      autocomplete.addListener('place_changed', function() {
+        infowindow.close();
+        marker.setVisible(false);
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+          // User entered the name of a Place that was not suggested and
+          // pressed the Enter key, or the Place Details request failed.
+          window.alert("No details available for input: '" + place.name + "'");
+          return;
+        }
+
+        latInput.value = place.geometry.location.lat();
+        lngInput.value = place.geometry.location.lng();
+
+        // If the place has a geometry, then present it on a map.
+        if (place.geometry.viewport) {
+          map.fitBounds(place.geometry.viewport);
+        } else {
+          map.setCenter(place.geometry.location);
+          map.setZoom(17);  // Why 17? Because it looks good.
+        }
+        marker.setPosition(place.geometry.location);
+        marker.setVisible(true);
+
+        var address = '';
+        if (place.address_components) {
+          address = [
+            (place.address_components[0] && place.address_components[0].short_name || ''),
+            (place.address_components[1] && place.address_components[1].short_name || ''),
+            (place.address_components[2] && place.address_components[2].short_name || '')
+          ].join(' ');
+        }
+      });
+    }
+      
+block scripts
+  script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places&callback=initMap` async defer)

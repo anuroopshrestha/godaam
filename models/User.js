@@ -66,20 +66,6 @@ userSchema.index({
   name: 'text'
 });
 
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('name')) {
-    next(); // skip it
-    return; // stop this function from running
-  }
-  this.slug = slug(this.name);
-  const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
-  const userssWithSlug = await this.constructor.find({ slug: slugRegEx });
-  if (userssWithSlug.length) {
-    this.slug = `${this.slug}-${userssWithSlug.length + 1}`;
-  }
-  next();
-});
-
 // https://github.com/saintedlama/passport-local-mongoose/issues/218
 userSchema.statics.registerAsync = function (data, password) {
   return new Promise((resolve, reject) => {
