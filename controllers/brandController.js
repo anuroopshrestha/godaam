@@ -24,3 +24,17 @@ exports.addBrand = async (req, res) => {
     res.redirect('/brands');
   }
 };
+
+exports.editBrand = async (req, res) => {
+  const brand = await Brand.findOne({ _id: req.params.id});
+  // res.json(brand);
+  res.render('brands/edit', {title: `Edit ${brand.name}`, brand});
+};
+
+exports.updateBrand = async (req, res) => {
+  console.log('asd');
+  // find and update the brand
+  const brand = await Brand.findOneAndUpdate({ _id: req.params.id}, req.body);
+  req.flash('info', `Successfully updated ${brand.name}`);
+  res.redirect('/brands');
+};
