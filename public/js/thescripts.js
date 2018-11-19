@@ -39,3 +39,12 @@ $('a.withChild').click(function(e) {
     $(this).siblings('ul').addClass('open');
   }
 });
+
+$('.delBrand').click(function(e) {
+  e.preventDefault();
+  const href = $(this).attr('href');
+  const response = confirm('Are you sure you want to delete this brand?'); // eslint-disable-line
+  if (response) {
+    window.location.href = href;
+  }
+});

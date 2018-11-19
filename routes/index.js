@@ -47,10 +47,10 @@ router.get('/locations', locationsController.allLocations);
 router.get('/categories', categoryController.categoriesPage);
 
 // BRANDS
-router.get('/brands', authController.isLoggedIn, brandController.brandsPage);
-router.post('/brands', authController.isLoggedIn, brandController.addBrand);
-router.get('/brand/:id', authController.isLoggedIn, brandController.editBrand);
-router.post('/brand/:id', authController.isLoggedIn, brandController.updateBrand);
-router.get('/brand/del', authController.isLoggedIn, brandController.deleteBrand);
+router.get('/brands', brandController.brandsPage);
+router.post('/brands', brandController.addBrand);
+router.get('/brand/:id', brandController.editBrand);
+router.post('/brand/:id', brandController.updateBrand);
+router.get('/brand/:id/del', brandController.deleteBrand);
 
 module.exports = router;
