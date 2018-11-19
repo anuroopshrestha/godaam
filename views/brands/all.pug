@@ -7,10 +7,15 @@ block content
     .card
       .card-title All Brands
       table.striped
+        tr
+          th Brand Name
+          th Action
         each brand in brands
           tr
             td #{brand.name} 
-          //pre= h.dump(brands)
+              //pre= h.dump(brands)
+            td 
+              a(href=`/brand/${brand._id}`) Edit
     .card
       .card-title Add New
       ._main
@@ -20,3 +25,4 @@ block content
             input#name(type="text" name="name")
           .control-row  
             button.btn.btn-primary Submit
+        

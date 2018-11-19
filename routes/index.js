@@ -36,7 +36,8 @@ router.get('/categories', authController.isLoggedIn, categoryController.categori
 // BRANDS
 router.get('/brands', authController.isLoggedIn, brandController.brandsPage);
 router.post('/brands', authController.isLoggedIn, brandController.addBrand);
-// router.get('/brands/:id');
+router.get('/brand/:id', authController.isLoggedIn, brandController.editBrand);
+router.post('/brand/:id', authController.isLoggedIn, brandController.updateBrand);
 // router.post('/brands/:id');
 
 module.exports = router;

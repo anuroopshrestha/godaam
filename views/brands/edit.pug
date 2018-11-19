@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+  .page-title
+    h1 Edit Brand
+    .card
+      .card-title
+      ._main
+        form.stacked(action=`/brand/${brand._id}` method="POST")
+          .control-row
+            label(for="name") Name
+            input#name(type="text" name="name" value=brand.name)
+          .control-row  
+            button.btn.btn-primary Submit
+        
