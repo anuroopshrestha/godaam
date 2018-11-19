@@ -16,7 +16,7 @@ router.get('/logout', authController.logout);
 
 // USERS
 // -- REGISTER ADMIN
-router.get('/register', userController.registerForm);
+// router.get('/register', userController.registerForm);
 
 // -- STORE ADMINS
 router.get('/users', authController.checkAdmin, userController.usersPage);
@@ -29,26 +29,22 @@ router.post(
 );
 
 // -- EDIT
-router.get('/user/:id', authController.isLoggedIn, userController.editUserPage);
+router.get('/user/:id', authController.checkAdmin, userController.editUserPage);
 router.post(
   '/user/:id',
-  authController.isLoggedIn,
+  authController.checkAdmin,
   catchErrors(userController.checkUser),
   userController.validateUserUpdate,
   catchErrors(userController.updateUser)
 );
 
-router.get(
-  '/',
-  authController.isLoggedIn,
-  homeController.homePage
-);
+router.get('/', homeController.homePage);
 
 // LOCATIONS
 router.get('/locations', locationsController.allLocations);
 
 // CATEGORIES
-router.get('/categories', authController.isLoggedIn, categoryController.categoriesPage);
+router.get('/categories', categoryController.categoriesPage);
 
 // BRANDS
 router.get('/brands', authController.isLoggedIn, brandController.brandsPage);

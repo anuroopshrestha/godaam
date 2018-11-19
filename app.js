@@ -12,7 +12,8 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const helpers = require('./helpers');
 const index = require('./routes/index');
-// const auth = require('./controllers/authController');
+const auth = require('./controllers/authController');
+const userController = require('./controllers/userController');
 const errorHandlers = require('./handlers/errorHandlers');
 
 require('./handlers/passport');
@@ -62,14 +63,13 @@ app.use(function(req, res, next) {
   // res.json({data: [1, 2, 3, 4]})
 });
 
-// Secure requests
+app.get('/login', userController.loginForm);
+app.post('/login', auth.login);
+app.get('/logout', auth.logout);
 
-// Secure API
-// app.all('/api', auth.apiAuthenticate, (req, res, next) => {
-//   next();
-// });
+// Secure all other URLs
 
-app.use('/', index);
+app.use('/', auth.isLoggedIn, index);
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {

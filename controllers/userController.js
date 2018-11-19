@@ -1,12 +1,7 @@
 const mongoose = require('mongoose');
 const natgeo = require('national-geographic-api').NationalGeographicAPI;
 const User = mongoose.model('User');
-const { DefaultUser } = require('passport-local-mongoose');
 const mail = require('../handlers/mailHandler');
-
-exports.registerForm = (req, res) => {
-  res.render('register', { title: 'Register' });
-};
 
 exports.loginForm = (req, res) => {
   res.render('login', { title: 'Login' });
