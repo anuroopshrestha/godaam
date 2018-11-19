@@ -6,6 +6,7 @@ const userController = require('../controllers/userController');
 const locationsController = require('../controllers/locationsController');
 const homeController = require('../controllers/homeController');
 const categoryController = require('../controllers/categoryController');
+const brandController = require('../controllers/brandController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -48,5 +49,11 @@ router.get('/locations', locationsController.allLocations);
 
 // CATEGORIES
 router.get('/categories', authController.isLoggedIn, categoryController.categoriesPage);
+
+// BRANDS
+router.get('/brands', authController.isLoggedIn, brandController.brandsPage);
+router.post('/brands', authController.isLoggedIn, brandController.addBrand);
+// router.get('/brands/:id');
+// router.post('/brands/:id');
 
 module.exports = router;

@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .page-title
+    h1 Brands
+  .card-row.grid-aside
+    .card
+      .card-title All Brands
+      table.striped
+        each brand in brands
+          tr
+            td #{brand.name} 
+          //pre= h.dump(brands)
+    .card
+      .card-title Add New
+      ._main
+        form.stacked(action="/brands" method="POST")
+          .control-row
+            label(for="name") Name
+            input#name(type="text" name="name")
+          .control-row  
+            button.btn.btn-primary Submit
