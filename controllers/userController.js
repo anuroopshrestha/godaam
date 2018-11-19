@@ -141,3 +141,15 @@ exports.editUserPage = async (req, res) => {
     res.redirect('/users');
   }
 };
+
+exports.getStoreList = async () => {
+  const stores = await User.find(
+    {
+      $and: [
+        { role: { $gt: 0 } },
+        { role: { $lt: 11 } }
+      ]
+    }
+  );
+  return stores;
+};

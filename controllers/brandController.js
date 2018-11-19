@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const Brand = mongoose.model('Brand');
 
+const userController = require('./userController');
+
 exports.brandsPage = async(req, res) => {
   try {
     const brands = await Brand.find();
-    console.log(brands);
-    res.render('brands/all', {title: 'Brands', brands});
+    const stores = await userController.getStoreList();
+    res.render('brands/all', {title: 'Brands', brands, stores});
   } catch (e) {
     console.log(e);
   }
@@ -13,9 +15,11 @@ exports.brandsPage = async(req, res) => {
 
 exports.addBrand = async (req, res) => {
   try {
+    if (!req.body.store) {
+      req.body.store = req.user.store._id;
+    }
     const brand = new Brand(req.body);
     await brand.save();
-    console.log(brand.slug);
     req.flash('info', 'New brand has been added');
     res.redirect('/brands');
   } catch (e) {
