@@ -15,7 +15,14 @@ block content
             td #{brand.name} 
               //pre= h.dump(brands)
             td 
-              a(href=`/brand/${brand._id}`) Edit
+              span.edit-cell
+                  ul.list-inline
+                    li
+                      a(href=`/brand/${brand._id}` title="Edit")
+                        span.ti-pencil
+                    li
+                      a(href=`/brand/del/${brand._id}` title="Delete")
+                        span.ti-trash
     .card
       .card-title Add New
       ._main

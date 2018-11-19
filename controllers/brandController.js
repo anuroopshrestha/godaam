@@ -38,3 +38,9 @@ exports.updateBrand = async (req, res) => {
   req.flash('info', `Successfully updated ${brand.name}`);
   res.redirect('/brands');
 };
+
+exports.deleteBrand = async (req, res) => {
+  const brand = await Brand.findByIdAndRemove({ _id: req.params.id}, req.body);
+  req.flash('info', `Successfully deleted ${brand.name}`);
+  res.redirect('/brands');
+};
