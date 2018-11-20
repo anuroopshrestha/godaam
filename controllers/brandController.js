@@ -29,7 +29,7 @@ exports.addBrand = async (req, res) => {
     }
     const brand = new Brand(req.body);
     await brand.save();
-    req.flash('info', 'New brand has been added');
+    req.flash('info', 'New brand has been added!');
     res.redirect('/brands');
   } catch (e) {
     console.log(e);
@@ -57,3 +57,8 @@ exports.deleteBrand = async (req, res) => {
   req.flash('info', `Successfully deleted ${brand.name}`);
   res.redirect('/brands');
 };
+
+// exports.getBrandList = async () => {
+//   const brands = await Brand.find();
+//   return brands;
+// };
