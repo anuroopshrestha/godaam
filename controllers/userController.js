@@ -109,16 +109,12 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.usersPage = async (req, res) => {
-  try {
-    const users = await User.find({
+  const users = await User.find(
+    {
       role: { $eq: 1 }
-    });
-    res.render('users/all', { title: 'Users', users });
-  } catch (e) {
-    console.log(e);
-    req.flash('error', 'An unexpected error has occurred. Please try again');
-    res.redirect('/');
-  }
+    }
+  );
+  res.render('users/all', { title: 'Users', users });
 };
 
 exports.addNewUserPage = (req, res) => {
