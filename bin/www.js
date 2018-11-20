@@ -14,6 +14,7 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 require('../models/User');
 require('../models/Category');
 require('../models/Brand');
+require('../models/Location');
 
 // Start our app!
 const app = require('../app');

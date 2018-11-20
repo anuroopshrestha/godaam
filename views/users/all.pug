@@ -16,7 +16,7 @@ block content
             th
             th Store
             th Location
-            th Email
+            th Products
           each user, i in users
             tr
               td #{i+1}
@@ -77,4 +77,4 @@ block content
                         span.ti-trash
               td #{user.store.name}
               td #{user.store.location.address}
-              td #{user.email}
+              td #{products}

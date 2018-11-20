@@ -19,7 +19,11 @@ router.get('/logout', authController.logout);
 // router.get('/register', userController.registerForm);
 
 // -- STORE ADMINS
-router.get('/users', authController.checkAdmin, userController.usersPage);
+router.get(
+  '/users',
+  authController.checkAdmin,
+  catchErrors(userController.usersPage)
+);
 router.get('/users/new', authController.checkAdmin, userController.addNewUserPage);
 router.post(
   '/users/new',
