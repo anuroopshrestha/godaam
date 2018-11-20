@@ -7,6 +7,7 @@ const locationsController = require('../controllers/locationsController');
 const homeController = require('../controllers/homeController');
 const categoryController = require('../controllers/categoryController');
 const brandController = require('../controllers/brandController');
+const productController = require('../controllers/productController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -56,5 +57,9 @@ router.post('/brands', brandController.addBrand);
 router.get('/brand/:id', brandController.editBrand);
 router.post('/brand/:id', brandController.updateBrand);
 router.get('/brand/:id/del', brandController.deleteBrand);
+
+// PRODUCTS
+router.get('/products', productController.productsPage);
+router.post('/products', productController.addProduct);
 
 module.exports = router;
