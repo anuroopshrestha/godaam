@@ -12,13 +12,17 @@ const brandSchema = new Schema({
   },
   store: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    required: 'Store must be supplied'
   },
   created: {
     type: Date,
     default: Date.now
   },
   image: String
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 brandSchema.pre('save', async function(next) {

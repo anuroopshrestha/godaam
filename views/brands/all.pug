@@ -9,11 +9,15 @@ block content
       table.striped
         tr
           th Brand Name
+          if user.role == 0 
+            th Stores
           th Action
         each brand in brands
           tr
             td #{brand.name} 
               //pre= h.dump(brands)
+            if user.role == 0  
+              td #{brand.store.store.name}
             td 
               span.edit-cell
                   ul.list-inline
@@ -38,5 +42,4 @@ block content
                 each store in stores
                   option(value=store._id) #{store.store.name}
           .control-row  
-            button.btn.btn-primary Submit
-        
+            button.btn.btn-primary Submit        
