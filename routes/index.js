@@ -3,7 +3,7 @@ const router = express.Router();
 
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
-const locationsController = require('../controllers/locationsController');
+const locationController = require('../controllers/locationController');
 const homeController = require('../controllers/homeController');
 const categoryController = require('../controllers/categoryController');
 const brandController = require('../controllers/brandController');
@@ -45,7 +45,11 @@ router.post(
 router.get('/', homeController.homePage);
 
 // LOCATIONS
-router.get('/locations', locationsController.allLocations);
+router.get('/locations', catchErrors(locationController.locationsPage));
+router.get('/locations/new', catchErrors(locationController.addLocationPage));
+router.post('/locations/new', catchErrors(locationController.addLocation));
+router.get('/location/:id', catchErrors(locationController.editLocationPage));
+router.post('/location/:id', catchErrors(locationController.saveLocation));
 
 // CATEGORIES
 router.get('/categories', categoryController.categoriesPage);
