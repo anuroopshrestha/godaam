@@ -3,40 +3,34 @@ extends ../layout
 block content
   .page-title
     h1 #{title}
-  form.columned(action="/users/new" method="POST")
+  form.stacked(action="/locations/new" method="POST")
     .card-row.grid-half-half
       .card
-        .card-title Store Information
+        .card-title Location Information
         .control-row
-          label(for="store-name") Store Name
-          input#store-name(type="text" name="store[name]" required)
+          label(for="name") Name
+          input#name(type="text" name="name")
         .control-row
           label(for="address") Address
-          input#address(type="text" name="store[location][address]" autocomplete="off" required)
+          input#address(type="text" name="location[address]" autocomplete="off" required)
         .control-row
           label(for="lng") Longitude
-          input#lng(type="text" name="store[location][coordinates][0]" required)
+          input#lng(type="text" name="location[coordinates][0]" required)
         .control-row
           label(for="lat") Lattitude
-          input#lat(type="text" name="store[location][coordinates][1]" required)
+          input#lat(type="text" name="location[coordinates][1]" required)
+        if user.role === 0
+          .control-row
+            label(for="store") Store
+            select#store(name="store")
+              option(value="0") -- Select Store
+              each store in stores
+                option(value=store._id) #{store.store.name}
+        button.btn.btn-primary Submit   
+      .card
         #map-wrap
           #map
-      .card
-        .card-title User Information
-        .control-row
-          label(for="name") Full Name
-          input#text(type="text" name="name" required)
-        .control-row
-          label(for="email") Email Address
-          input#email(type="email" name="email" required)
-        .control-row
-          label(for="password") Password
-          input#password(type="password" name="password" required)
-        .control-row
-          label(for="confirm-password") Confirm Password
-          input#confirm-password(type="password", name="confirm-password" required)
-    br
-    button.btn.btn-primary Submit
+
   script.
     function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
