@@ -3,6 +3,11 @@ const natgeo = require('national-geographic-api').NationalGeographicAPI;
 const User = mongoose.model('User');
 const mail = require('../handlers/mailHandler');
 
+exports.getUsers = async () => {
+  const users = await User.find({ role: { $gt: 0 } });
+  return users;
+};
+
 exports.loginForm = (req, res) => {
   res.render('login', { title: 'Login' });
 };
@@ -34,10 +39,6 @@ exports.validateRegister = (req, res, next) => {
   //   remove_extension: false,
   //   gmail_remove_subaddress: false
   // });
-  req.checkBody('store.name', 'Store name is empty').notEmpty();
-  req.checkBody('store.location.address', 'Store address is empty').notEmpty();
-  req.checkBody('store.location.coordinates[0]', 'Longitude is empty').notEmpty();
-  req.checkBody('store.location.coordinates[1]', 'Lattitude is empty').notEmpty();
   req.checkBody('password', 'Password Cannot be Blank!').notEmpty();
   req.checkBody('confirm-password', 'Confirmed Password cannot be blank!').notEmpty();
   req.checkBody('confirm-password', 'Your passwords do not match').equals(req.body.password);
@@ -56,10 +57,6 @@ exports.validateUserUpdate = (req, res, next) => {
   req.sanitizeBody('name');
   req.checkBody('name', 'You must supply a name!').notEmpty();
   req.checkBody('email', 'That Email is not valid!').isEmail();
-  req.checkBody('store.name', 'Store name is empty').notEmpty();
-  req.checkBody('store.location.address', 'Store address is empty').notEmpty();
-  req.checkBody('store.location.coordinates[0]', 'Longitude is empty').notEmpty();
-  req.checkBody('store.location.coordinates[1]', 'Lattitude is empty').notEmpty();
   if (req.body.password) {
     req.checkBody('confirm-password', 'Confirmed Password cannot be blank!').notEmpty();
     req.checkBody('confirm-password', 'Your passwords do not match').equals(req.body.password);
@@ -78,7 +75,6 @@ exports.updateUser = async (req, res) => {
   await User.findOneAndUpdate({ _id: req.params.id }, req.body);
   if (req.body.password) {
     const user = await User.findOne({ _id: req.params.id });
-    console.log(user);
     await user.setPassword(req.body.password);
     await user.save();
   }
@@ -136,16 +132,4 @@ exports.editUserPage = async (req, res) => {
     req.flash('An unexpected error has occurred. Please try again.');
     res.redirect('/users');
   }
-};
-
-exports.getStoreList = async () => {
-  const stores = await User.find(
-    {
-      $and: [
-        { role: { $gt: 0 } },
-        { role: { $lt: 11 } }
-      ]
-    }
-  );
-  return stores;
 };

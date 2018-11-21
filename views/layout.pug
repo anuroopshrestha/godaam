@@ -59,7 +59,7 @@ html
 						ul
 							li.active
 								a(href="/")
-									span.ti-home
+									span.ti-dashboard
 									span._txt Dashboard
 							li
 								a.withChild(href="#")
@@ -68,33 +68,27 @@ html
 									span.ti-angle-down.submenuopen
 								ul.submenu
 									li
-										a(href="#") Add New
-									li
-										a(href="/categories") Categories
+										a(href="#") Add Product
 									li
 										a(href="#") View All
+							li
+								a.withChild(href="#")
+									span.ti-home
+									span._txt Stores
+									span.ti-angle-down.submenuopen
+								ul.submenu
+									li
+										a(href="/stores") View All
+									li
+										a(href="/stores/new") Add New
 							li
 								a(href="#")
 									span.ti-control-shuffle
 									span._txt Transactions
 							li
-								a.withChild(href="#")
-									span.ti-map
-									span._txt Locations
-									span.ti-angle-down.submenuopen
-								ul.submenu
-									li
-										a(href="/locations") View All
-									li
-										a(href="/locations/new") Add New
-							li
 								a(href="/editors")
 									span.ti-id-badge
 									span._txt Editors
-							li
-								a(href="/brands")
-									span.ti-package
-									span._txt Brands
 							li
 								a(href="#")
 									span.ti-stats-up

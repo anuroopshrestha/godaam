@@ -121,7 +121,14 @@ const storeSchema = new Schema({
       required: 'You must supply an address!'
     }
   },
-  users: [mongoose.SchemaTypes.ObjectId],
+  registration: {
+    code: String,
+    date: Date
+  },
+  users: {
+    admin: mongoose.SchemaTypes.ObjectId,
+    editors: [mongoose.SchemaTypes.ObjectId]
+  },
   warehouses: [warehouseSchema],
   brands: [brandSchema],
   categories: [categorySchema]
