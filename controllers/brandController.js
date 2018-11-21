@@ -58,7 +58,12 @@ exports.deleteBrand = async (req, res) => {
   res.redirect('/brands');
 };
 
-// exports.getBrandList = async () => {
-//   const brands = await Brand.find();
+// exports.getBrandList = async => {
+//   const brands = await Brand.find({name});
 //   return brands;
 // };
+
+exports.getBrandList = async () => {
+  const stores = await Brand.find({name: {}});
+  return stores;
+};

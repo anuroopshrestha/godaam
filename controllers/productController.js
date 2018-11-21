@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
-// const brandController = require('./brandController');
+const brandController = require('./brandController');
 
 exports.productsPage = async (req, res) => {
-  res.render('products/all', {title: 'Products'});
+  const brands = await brandController.getBrandList();
+  res.render('products/all', {title: 'Products'}, brands);
 };
 
 exports.addProduct = async (req, res) => {
