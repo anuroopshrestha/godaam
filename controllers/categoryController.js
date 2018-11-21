@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 const Category = mongoose.model('Category');
 
+const userController = require('./userController');
+
 exports.categoriesPage = async (req, res) => {
-  try {
-    const categories = Category.find();
-    res.render('categories/all', { title: 'Categories', categories });
-  } catch (e) {
-    console.log(e);
-    req.flash('error', 'An unexpected error has occurred. Please try again.');
-    res.redirect('/');
-  }
+  const categories = Category
+    .find()
+    .populate({
+      path: 'store',
+      select: 'store'
+    });
+  const stores = await userController.getStoreList();
+  res.render('categories/all', { title: 'Categories', categories, stores });
 };

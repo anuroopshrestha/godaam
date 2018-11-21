@@ -3,34 +3,25 @@ const Location = mongoose.model('Location');
 const storeController = require('./userController');
 
 exports.locationsPage = async (req, res) => {
-  let query = {};
-  if (req.user.role > 0) query = { store: req.user._id };
+  const stores = await storeController.getStoreList();
   const locations = await Location
-    .find(query)
+    .find()
     .populate({
       path: 'store',
       select: 'store'
     });
-  res.render('locations/all', { title: 'Locations', locations });
+  res.render('locations/all', { title: 'Locations', locations, stores });
 };
 
 exports.addLocationPage = async (req, res) => {
-  if (req.user.role === 0) {
-    const stores = await storeController.getStoreList();
-    res.render('locations/new', { title: 'Add New Location', stores });
-  } else {
-    res.render('locations/new', { title: 'Add New Location' });
-  }
+  const stores = await storeController.getStoreList();
+  res.render('locations/new', { title: 'Add New Location', stores });
 };
 
 exports.editLocationPage = async (req, res) => {
   const location = await Location.findOne({ _id: req.params.id });
-  if (req.user.role === 0) {
-    const stores = await storeController.getStoreList();
-    res.render('locations/edit', { title: 'Edit Location', location, stores });
-  } else {
-    res.render('locations/edit', { title: 'Edit Location', location });
-  }
+  const stores = await storeController.getStoreList();
+  res.render('locations/edit', { title: 'Edit Location', location, stores });
 };
 
 exports.addLocation = async (req, res) => {

@@ -11,9 +11,13 @@ const categorySchema = new Schema({
   slug: String,
   parent: mongoose.Schema.Types.ObjectId,
   picture: String,
-  order: {
-    type: Number,
-    default: 0
+  color: {
+    type: String,
+    default: '#e67e22'
+  },
+  store: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: 'Store ID must be supplied.'
   },
   created: {
     type: Date,

@@ -69,7 +69,7 @@ app.get('/logout', auth.logout);
 
 // Secure all other URLs
 
-app.use('/', auth.isLoggedIn, index);
+app.use('/', auth.checkAdmin, index);
 
 // catch 404 and forward to error handler
 // app.use(function (req, res, next) {
