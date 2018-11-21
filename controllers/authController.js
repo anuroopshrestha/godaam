@@ -4,22 +4,20 @@ const passport = require('passport');
 
 exports.logout = (req, res) => {
   req.logout();
-  res.redirect('/');
+  res.redirect('/login');
 };
 
 exports.login = passport.authenticate('local', {
   failureRedirect: '/login',
   failureFlash: 'Failed Login!',
-  successRedirect: '/',
-  successFlash: 'You are now logged in!'
+  successRedirect: '/'
 });
 
 exports.checkAdmin = (req, res, next) => {
-  if (req.user.role === 0) {
+  if (req.isAuthenticated() && req.user.role === 0) {
     next();
   } else {
     req.logout();
-    req.flash('error', 'You don\'t have enough privileges.');
     res.redirect('/login');
   }
 };

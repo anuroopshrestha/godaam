@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-const Brand = mongoose.model('Brand');
-
-const userController = require('./userController');
+const storeController = require('./storeController');
 
 exports.brandsPage = async(req, res) => {
   let query = {};

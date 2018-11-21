@@ -3,11 +3,9 @@ const router = express.Router();
 
 const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
-const locationController = require('../controllers/locationController');
 const homeController = require('../controllers/homeController');
-const categoryController = require('../controllers/categoryController');
-const brandController = require('../controllers/brandController');
 const productController = require('../controllers/productController');
+const brandController = require('../controllers/brandController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -43,21 +41,21 @@ router.post(
 router.get('/', homeController.homePage);
 
 // LOCATIONS
-router.get('/locations', catchErrors(locationController.locationsPage));
-router.get('/locations/new', catchErrors(locationController.addLocationPage));
-router.post('/locations/new', catchErrors(locationController.addLocation));
-router.get('/location/:id', catchErrors(locationController.editLocationPage));
-router.post('/location/:id', catchErrors(locationController.saveLocation));
+// router.get('/locations', catchErrors(locationController.locationsPage));
+// router.get('/locations/new', catchErrors(locationController.addLocationPage));
+// router.post('/locations/new', catchErrors(locationController.addLocation));
+// router.get('/location/:id', catchErrors(locationController.editLocationPage));
+// router.post('/location/:id', catchErrors(locationController.saveLocation));
 
 // CATEGORIES
-router.get('/categories', categoryController.categoriesPage);
+// router.get('/categories', categoryController.categoriesPage);
 
 // BRANDS
-router.get('/brands', brandController.brandsPage);
-router.post('/brands', brandController.addBrand);
-router.get('/brand/:id', brandController.editBrand);
-router.post('/brand/:id', brandController.updateBrand);
-router.get('/brand/:id/del', brandController.deleteBrand);
+// router.get('/brands', brandController.brandsPage);
+// router.post('/brands', brandController.addBrand);
+// router.get('/brand/:id', brandController.editBrand);
+// router.post('/brand/:id', brandController.updateBrand);
+// router.get('/brand/:id/del', brandController.deleteBrand);
 
 // PRODUCTS
 router.get('/products', productController.productsPage);

@@ -12,9 +12,7 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 // Import Models
 require('../models/User');
-require('../models/Category');
-require('../models/Brand');
-require('../models/Location');
+require('../models/Store');
 require('../models/Product');
 
 // Start our app!
