@@ -5,6 +5,8 @@ const authController = require('../controllers/authController');
 const userController = require('../controllers/userController');
 const homeController = require('../controllers/homeController');
 const productController = require('../controllers/productController');
+const storeController = require('../controllers/storeController');
+const categoryController = require('../controllers/categoryController');
 const brandController = require('../controllers/brandController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
@@ -56,9 +58,17 @@ router.get('/brands', catchErrors(brandController.brandsPage));
 // router.get('/brand/:id', brandController.editBrand);
 // router.post('/brand/:id', brandController.updateBrand);
 // router.get('/brand/:id/del', brandController.deleteBrand);
+// STORES
+router.get('/stores', catchErrors(storeController.storesPage));
+router.get('/stores/new', catchErrors(storeController.addStorePage));
+router.post('/stores/new', catchErrors(storeController.addStore));
+router.get('/store/:id', catchErrors(storeController.editStorePage));
 
 // PRODUCTS
 router.get('/products', catchErrors(productController.productsPage));
 router.post('/products', catchErrors(productController.addProduct));
+
+// CATEGORIES
+router.post('/store/:id/addcat', catchErrors(categoryController.addCategory));
 
 module.exports = router;

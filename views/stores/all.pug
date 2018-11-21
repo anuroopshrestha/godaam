@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+  .page-title
+    h1 #{title}
+  .card-row
+    .card
+      .card-title All Stores
+      if stores.length < 1
+        p No Stores Found
+      table.striped
+        tr
+          th S. No.
+          th Name
+          th
+          th Address
+          th Products
+        each store, i in stores
+          tr
+            td #{i+1}
+            td #{store.name}
+            td 
+              span.edit-cell
+                ul.list-inline
+                  li
+                    a(href=`/store/${store._id}` title="Edit")
+                      span.ti-pencil
+                  li
+                    a(href=`/store/del/${store._id}` title="Delete")
+                      span.ti-trash
+            td #{store.location.address}
+            td 
