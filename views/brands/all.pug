@@ -9,24 +9,20 @@ block content
       table.striped
         tr
           th Brand Name
-          if user.role == 0 
-            th Stores
+          th Stores
           th Action
-        each brand in brands
-          tr
-            td #{brand.name} 
-              //pre= h.dump(brands)
-            if user.role == 0  
-              td #{brand.store.store.name}
-            td 
-              span.edit-cell
-                  ul.list-inline
-                    li
-                      a(href=`/brand/${brand._id}` title="Edit")
-                        span.ti-pencil
-                    li
-                      a.delBrand(href=`/brand/${brand._id}/del` title="Delete")
-                        span.ti-trash
+        tr
+           td
+           td 
+           td 
+             span.edit-cell
+                 ul.list-inline
+                   li
+                     a(href=`#` title="Edit")
+                       span.ti-pencil
+                   li
+                     a.delBrand(href=`#` title="Delete")
+                       span.ti-trash
     .card
       .card-title Add New
       ._main
@@ -34,12 +30,10 @@ block content
           .control-row
             label(for="name") Name
             input#name(type="text" name="name")
-          if user.role == 0
             .control-row
               label(for="store") Store
-              select#store(name="store")
+              select(name="store")
                 option(value="0") -- Select Store
-                each store in stores
-                  option(value=store._id) #{store.store.name}
+                option(value="1") 
           .control-row  
             button.btn.btn-primary Submit        

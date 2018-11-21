@@ -51,14 +51,14 @@ router.get('/', homeController.homePage);
 // router.get('/categories', categoryController.categoriesPage);
 
 // BRANDS
-// router.get('/brands', brandController.brandsPage);
+router.get('/brands', catchErrors(brandController.brandsPage));
 // router.post('/brands', brandController.addBrand);
 // router.get('/brand/:id', brandController.editBrand);
 // router.post('/brand/:id', brandController.updateBrand);
 // router.get('/brand/:id/del', brandController.deleteBrand);
 
 // PRODUCTS
-router.get('/products', productController.productsPage);
-router.post('/products', productController.addProduct);
+router.get('/products', catchErrors(productController.productsPage));
+router.post('/products', catchErrors(productController.addProduct));
 
 module.exports = router;

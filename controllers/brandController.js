@@ -1,38 +1,21 @@
+const mongoose = require('mongoose');
+const Brand = mongoose.model('Store');
 const storeController = require('./storeController');
 
 exports.brandsPage = async(req, res) => {
-  let query = {};
-  if (req.user.role > 0) query = { store: req.user._id };
-  try {
-    const brands = await Brand
-      .find(query)
-      .populate({
-        path: 'store',
-        select: 'store'
-      });
-    const stores = await userController.getStoreList();
-    // res.json(brands);
-    // return;
-    res.render('brands/all', {title: 'Brands', brands, stores});
-  } catch (e) {
-    console.log(e);
-  }
+  res.render('brands/all', {title: 'Brands'});
 };
 
 exports.addBrand = async (req, res) => {
-  try {
-    if (!req.body.store) {
-      req.body.store = req.user._id;
-    }
-    const brand = new Brand(req.body);
-    await brand.save();
-    req.flash('info', 'New brand has been added!');
-    res.redirect('/brands');
-  } catch (e) {
-    console.log(e);
-    req.flash('error', 'An unexpected error has occured.');
-    res.redirect('/brands');
+  if (!req.body.store) {
+    req.body.store = req.user._id;
   }
+  const brand = new Brand(req.body);
+  await brand.save();
+  req.flash('info', 'New brand has been added!');
+  res.redirect('/brands');
+  req.flash('error', 'An unexpected error has occured.');
+  res.redirect('/brands');
 };
 
 exports.editBrand = async (req, res) => {
