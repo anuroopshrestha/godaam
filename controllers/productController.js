@@ -13,7 +13,6 @@ exports.addProduct = async (req, res) => {
   await product.save();
   req.flash('info', 'New product has been added!');
   res.redirect('/products');
-  console.log(e);
   req.flash('error', 'An unexpected error has occured.');
   res.redirect('/products');
 };
