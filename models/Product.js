@@ -16,18 +16,8 @@ const productSchema = new Schema({
     required: 'Stock must be supplied'
   },
   location: {
-    type: {
-      type: String,
-      default: 'Point'
-    },
-    coordinates: [{
-      type: Number,
-      required: 'Coordinates must be supplied'
-    }],
-    address: {
-      type: String,
-      required: 'Address must be supplied'
-    }
+    type: mongoose.Schema.ObjectId,
+    required: 'Location must be supplied'
   },
   price: {
     type: Number,
@@ -35,11 +25,12 @@ const productSchema = new Schema({
   },
   brand: {
     type: mongoose.SchemaTypes.ObjectId,
-    ref: 'brand'
+    ref: 'Store'
   },
-  category: {
-    type: String
-  },
+  categories: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    required: 'Category must be supplied'
+  }],
   image: String,
   created: {
     type: Date,

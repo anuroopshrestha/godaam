@@ -19,20 +19,19 @@ block content
             label(for="sku") SKU
             input(type="text" name="SKU")
           .control-row
+            label(for="category") Category
+            input(type="text" name="category")
+          .control-row
             label(for="stock") Stock
             input(type="number" name="stock")
-          .control-row
-            label(for="Address") Address
-            input(type="text" name="location[address]")
-          .control-row
-            label(for="Coordinates") Location
-            input(type="text" name="location[coordinates]")
+          //- .control-row
+          //-   label(for="Address") Address
+          //-   input(type="text" name="location[address]")
           .control-row
             label(for="price") Price
             input(type="number" name="price")
-          .control-row
-            select#prodBrand(name="brand")
-              option(value="0") --Select Brand
-              pre=h.dump(brand)
+          //- .control-row
+          //-   select#prodBrand(name="brand")
+          //-     option(value="0") --Select Brand
           .control-row  
             button.btn.btn-primary Submit        
