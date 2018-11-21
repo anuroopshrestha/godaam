@@ -22,22 +22,19 @@ router.get('/logout', authController.logout);
 // -- STORE ADMINS
 router.get(
   '/users',
-  authController.checkAdmin,
   catchErrors(userController.usersPage)
 );
-router.get('/users/new', authController.checkAdmin, userController.addNewUserPage);
+router.get('/users/new', userController.addNewUserPage);
 router.post(
   '/users/new',
-  authController.checkAdmin,
   userController.validateRegister,
   catchErrors(userController.registerUser)
 );
 
 // -- EDIT
-router.get('/user/:id', authController.checkAdmin, userController.editUserPage);
+router.get('/user/:id', userController.editUserPage);
 router.post(
   '/user/:id',
-  authController.checkAdmin,
   catchErrors(userController.checkUser),
   userController.validateUserUpdate,
   catchErrors(userController.updateUser)
