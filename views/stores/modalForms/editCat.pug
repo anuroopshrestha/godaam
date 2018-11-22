@@ -1,6 +1,47 @@
 .modal-content
-  form.stacked(action=`/store/updatecat/${store._id}/${category._id}` method="POST")
+  .modal-title
+    h3 #{title}
+  form.columned(action=`/store/updatecat/${store._id}/${category._id}` method="POST" enctype="multipart/form-data")
     .control-row
       label(for="name") Name
       input#name(type="text" name="name" value=category.name)
-    button.btn-btn-primary Save
+    .control-row
+      label(for="parent") Parent
+      select#parent
+        option(value="0") --
+        each category in store.categories
+          option(value=category._id) #{category.name}
+    .control-row
+      label(for="image") Image
+      input#image(type="file" name="image")
+    .control-row
+      label(for="color") Color
+      .color-picker
+    input#color(type="hidden" name="identifier[color]" value=category.identifier.color)
+    button.btn.btn-primary Save
+script.
+  var colorInput = document.getElementById('color');
+  var pickr = Pickr.create({
+    el: '.color-picker',
+    default: '#{category.identifier.color}',
+
+    components: {
+      // Main components
+      preview: true,
+      hue: true,
+      defaultRepresentation: 'HEX',
+
+      // Input / output Options
+      interaction: {
+        hex: true,
+        rgba: true,
+        input: true,
+        save: true
+      }
+    },
+    // User has clicked the save button
+    onSave(hsva, instance) {
+      var colorString = '#' + hsva.toHEX().join('');
+      colorInput.value = colorString;
+    }
+  });
