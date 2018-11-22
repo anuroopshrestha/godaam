@@ -40,6 +40,32 @@ block content
   .card-row.grid-half-half
     .card
         .card-title Brands
+        table.lined 
+          tr
+            th S.No
+            th Name
+            th
+          each brand, i in store.brands
+            tr
+              td #{i+1} 
+              td #{brand.name}
+              td 
+                span.edit-cell
+                  ul.list-inline
+                    li
+                      a(href=`/store/${brand._id}` title="Edit")
+                        span.ti-pencil
+                    li
+                      a(href=`/store/del/${brand._id}` title="Delete")
+                        span.ti-trash
+        br
+        .card-title Add Brand
+        form.columned(action=`/store/${store._id}/addbrand` method="POST")
+          .control-row
+            div
+              label Name
+            input(type="text" name="name")
+          button.btn.btn-primary Add Brand
     .card
       .card-title Categories
       table.lined
