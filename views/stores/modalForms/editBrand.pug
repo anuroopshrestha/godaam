@@ -1,0 +1,6 @@
+.modal-content
+  form.stacked(action=`/store/updatebrand/${store._id}/${brand._id}` method="POST")
+    .control-row
+      label(for="name") Name
+      input#name(type="text" name="name" value=brand.name)
+    button.btn-btn-primary Save

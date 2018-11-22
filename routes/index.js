@@ -55,10 +55,9 @@ router.get('/', homeController.homePage);
 
 // BRANDS
 router.post('/store/:id/addbrand', catchErrors(brandController.addBrand));
-// router.get('/store/:id/edit', catchErrors(brandController.editBrand));
-// router.get('/brand/:id', brandController.editBrand);
-// router.post('/brand/:id', brandController.updateBrand);
-// router.get('/brand/:id/del', brandController.deleteBrand);
+router.get('/store/updatebrand/:store/:brand', catchErrors(brandController.editBrandModal));
+router.post('/store/updatebrand/:store/:brand', brandController.saveBrand);
+
 // STORES
 router.get('/stores', catchErrors(storeController.storesPage));
 router.get('/stores/new', catchErrors(storeController.addStorePage));
