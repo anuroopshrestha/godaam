@@ -8,6 +8,7 @@ const productController = require('../controllers/productController');
 const storeController = require('../controllers/storeController');
 const categoryController = require('../controllers/categoryController');
 const brandController = require('../controllers/brandController');
+const warehouseController = require('../controllers/warehouseController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -54,7 +55,7 @@ router.get('/', homeController.homePage);
 
 // BRANDS
 router.post('/store/:id/addbrand', catchErrors(brandController.addBrand));
-router.get('/store/:id/edit', catchErrors(brandController.editBrand));
+// router.get('/store/:id/edit', catchErrors(brandController.editBrand));
 // router.get('/brand/:id', brandController.editBrand);
 // router.post('/brand/:id', brandController.updateBrand);
 // router.get('/brand/:id/del', brandController.deleteBrand);
@@ -70,5 +71,8 @@ router.post('/products', catchErrors(productController.addProduct));
 
 // CATEGORIES
 router.post('/store/:id/addcat', catchErrors(categoryController.addCategory));
+
+// WAREHOUSES
+router.post('/store/:id/addware', catchErrors(warehouseController.addWarehouse));
 
 module.exports = router;

@@ -56,10 +56,10 @@ block content
                 span.edit-cell
                   ul.list-inline
                     li
-                      a(href=`/store/${brand._id}` title="Edit")
+                      a(href=`#` title="Edit")
                         span.ti-pencil
                     li
-                      a(href=`/store/del/${brand._id}` title="Delete")
+                      a(href=`#` title="Delete")
                         span.ti-trash
         br
         .card-title Add Brand
@@ -114,7 +114,30 @@ block content
           label(for="color") Color
           .color-picker
         input#color(type="hidden" name="identifier[color]" value="#2C3A47")
-        button.btn.btn-primary Add Category
+        button.btn.btn-primary Add 
+  .card-row.grid-half-half
+    .card
+      .card-title Warehouses
+      table.lined
+        tr
+          th S. No.
+          th Name
+          th Address
+        each warehouse, i in store.warehouses
+          tr
+            th #{i+1}
+            th #{warehouse.name}
+            th #{warehouse.location}
+      br
+      .card-title Add Warehouse
+      form.columned(action=`/store/${store._id}/addware` method="POST")
+        .control-row
+          label(for="name") Name
+          input(type="text" name="name")
+        .control-row
+          label(for="address") Address
+          input(type="text" name="location[address]")
+        button.btn.btn-primary Add
   script.
     function initMap() {
       var map = new google.maps.Map(document.getElementById('map'), {
