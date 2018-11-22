@@ -52,3 +52,12 @@ $('.delBrand').click(function(e) {
 $('.modal-close').click(function() {
   $('.modal-wrap').addClass('off');
 });
+
+$('.openModal').click(function(e) {
+  e.preventDefault();
+  $('.modal-wrap').removeClass('off');
+  const url = $(this).data('url');
+  $('.modal-main').load(url, function() {
+    $('.modal-loader').addClass('off');
+  });
+});

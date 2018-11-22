@@ -59,6 +59,10 @@ a {
         display: grid;
         justify-content: center;
         align-items: center;
+        &.off {
+          opacity: 0;
+          visibility: hidden;
+        }
       }
     }
     .modal-close {
