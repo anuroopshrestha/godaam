@@ -74,12 +74,17 @@ block content
       table.lined
         tr
           th S. No.
+          th
           th Name
           th
           th Parent
         each category, i in store.categories
           tr
             td #{i+1}
+            td
+              .category-identifier(style=`background: ${category.identifier.color || '#fff'}`)
+                if category.identifier.image
+                  img(src=`/uploads/${store.slug}/${category.identifier.image}`, alt=store.slug)
             td #{category.name}
             td
               span.edit-cell
@@ -97,7 +102,6 @@ block content
         .control-row
           div
             label(for="name") Name
-            p.small Leave blank to keep password unchanged
           input#name(type="text" name="name" required)
         .control-row
           div
