@@ -8,7 +8,8 @@ exports.addCategory = async (req, res) => {
       $push: {
         categories: req.body
       }
-    }
+    },
+    { new: true, runValidators: true }
   );
   req.flash('success', 'Category has been added successfully.');
   res.redirect(`/store/${req.params.id}`);

@@ -33,7 +33,11 @@ exports.addStore = async (req, res) => {
 };
 
 exports.editStorePage = async (req, res) => {
-  const store = await Store.findOne({ _id: req.params.id });
+  const store = await Store
+    .findOne({ _id: req.params.id })
+    .populate('brands')
+    .populate('categories')
+    .populate('warehouses');
   const users = await userController.getUsers();
   res.render('stores/edit', { title: 'Edit Store', store, users });
 };

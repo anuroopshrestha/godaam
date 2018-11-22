@@ -7,13 +7,25 @@ html
 		//- <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500" rel="stylesheet">
 
+		block styles
+
 		link(rel='stylesheet', href='/dist/css/themify-icons.css')
 		link(rel='stylesheet', href='/dist/css/portal.min.css')
 		link(rel='stylesheet', href='/dist/css/global.min.css')
 
+		block headerScripts
+
 	body
 		#loader
 			.spinner
+		.modal-wrap.off
+			.modal
+				.modal-inner
+					.modal-loader
+						.spinner
+					.modal-main
+				.modal-close
+					span.ti-close
 		script.
 			window.addEventListener('load', () => {
 				const loader = document.getElementById('loader');

@@ -32,6 +32,49 @@ a {
   }
 }
 
+.modal-wrap {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.69);
+  z-index: 999;
+  opacity: 1;
+  visibility: visible;
+  .modal {
+    width: 800px;
+    max-width: 100%;
+    margin: 30px auto;
+    display: grid;
+    grid-template-columns: auto min-content;
+    .modal-inner {
+      background: #fff;
+      min-height: 400px;
+      position: relative;
+      .modal-loader {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    .modal-close {
+      color: #fff;
+      padding: 0 0 0 18px;
+      height: max-content;
+      cursor: pointer;
+    }
+  }
+  &.off {
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s ease;
+  }
+}
+
 #toast-wrap {
   position: absolute;
   width: 100%;

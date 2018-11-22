@@ -76,7 +76,10 @@ const categorySchema = new Schema({
     required: 'Name must be supplied.'
   },
   slug: String,
-  parent: mongoose.Schema.Types.ObjectId,
+  parent: {
+    type: mongoose.Schema.Types.ObjectId,
+    default: null
+  },
   picture: String,
   identifier: {
     image: String,

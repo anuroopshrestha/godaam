@@ -48,3 +48,7 @@ $('.delBrand').click(function(e) {
     window.location.href = href;
   }
 });
+
+$('.modal-close').click(function() {
+  $('.modal-wrap').addClass('off');
+});
