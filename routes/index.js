@@ -71,6 +71,8 @@ router.post('/products', catchErrors(productController.addProduct));
 
 // CATEGORIES
 router.post('/store/:id/addcat', catchErrors(categoryController.addCategory));
+router.get('/store/updatecat/:store/:cat', catchErrors(categoryController.editCategoryModal));
+router.post('/store/updatecat/:store/:cat', categoryController.saveCategory);
 
 // WAREHOUSES
 router.post('/store/:id/addware', catchErrors(warehouseController.addWarehouse));
