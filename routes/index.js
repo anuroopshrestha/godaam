@@ -53,8 +53,8 @@ router.get('/', homeController.homePage);
 // router.get('/categories', categoryController.categoriesPage);
 
 // BRANDS
-router.get('/brands', catchErrors(brandController.brandsPage));
-// router.post('/brands', brandController.addBrand);
+router.post('/store/:id/addbrand', catchErrors(brandController.addBrand));
+router.get('/store/:id/edit', catchErrors(brandController.editBrand));
 // router.get('/brand/:id', brandController.editBrand);
 // router.post('/brand/:id', brandController.updateBrand);
 // router.get('/brand/:id/del', brandController.deleteBrand);
