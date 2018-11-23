@@ -1,21 +1,11 @@
 const mongoose = require('mongoose');
-const multer = require('multer');
 const sharp = require('sharp');
 const uuid = require('uuid');
 const fs = require('fs');
+const multer = require('multer');
 const Store = mongoose.model('Store');
 
-const multerOptions = {
-  storage: multer.memoryStorage(),
-  fileFilter(req, file, next) {
-    const isPhoto = file.mimetype.startsWith('image/');
-    if (isPhoto) {
-      next(null, true);
-    } else {
-      next({ message: 'The image you uploaded is invalid' }, false);
-    }
-  }
-};
+const imageHandler = require('../handlers/imageHandler');
 
 exports.addCategory = async (req, res) => {
   await Store.findOneAndUpdate(
@@ -39,10 +29,22 @@ exports.editCategoryModal = async (req, res) => {
   res.render('stores/modalForms/editCat', { title: 'Edit Category', store, category: selectedCategory[0] });
 };
 
-exports.uploadPicture = multer(multerOptions).single('image');
+exports.uploadPicture = multer(imageHandler.getMulterOptions({
+  fileSize: 1
+}))
+  .single('image');
+
+exports.catchUploadErrors = (err, req, res, next) => {
+  if (err) {
+    req.flash('error', err.message);
+    res.redirect(`/store/${req.params.store}`);
+  } else {
+    next();
+  }
+};
 
 exports.resizePicture = async (req, res, next) => {
-
+  console.log('resize', req.body, req.file);
   if (!req.file) {
     next();
     return;
@@ -59,7 +61,7 @@ exports.resizePicture = async (req, res, next) => {
   const extension = req.file.mimetype.split('/')[1];
   const imageResize = sharp(req.file.buffer);
 
-  imageResize.resize(32, 32);
+  imageResize.resize(250, 250);
   await imageResize.toFile(`./public/uploads/${store.slug}/${photoName}.${extension}`);
 
   req.body.catImage = `${photoName}.${extension}`;

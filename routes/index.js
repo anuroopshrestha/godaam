@@ -74,6 +74,7 @@ router.get('/store/updatecat/:store/:cat', catchErrors(categoryController.editCa
 router.post(
   '/store/updatecat/:store/:cat',
   categoryController.uploadPicture,
+  categoryController.catchUploadErrors,
   catchErrors(categoryController.resizePicture),
   catchErrors(categoryController.saveCategory)
 );
