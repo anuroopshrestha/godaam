@@ -84,3 +84,16 @@ exports.saveCategory = async (req, res) => {
   req.flash('success', 'Category updated successfully');
   res.redirect(`/store/${req.params.store}`);
 };
+
+exports.delCat = async (req, res) => {
+  await Store.findByIdAndUpdate(
+    { _id: req.params.store},
+    {
+      $pull: {
+        categories: { _id: req.params.cat}
+      }
+    }
+  );
+  req.flash('success', 'Category deleted successfully');
+  res.redirect(`/store/${req.params.store}`);
+};

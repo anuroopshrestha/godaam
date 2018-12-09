@@ -31,3 +31,17 @@ exports.saveBrand = async (req, res) => {
   req.flash('success', 'Brand updated successfully');
   res.redirect(`/store/${req.params.store}`);
 };
+
+exports.delBrand = async (req, res) => {
+  await Store.findByIdAndUpdate(
+    { _id: req.params.store},
+    {
+      $pull: {
+        brands: { _id: req.params.brand}
+      }
+    }
+  );
+  // todo update products
+  req.flash('success', 'Brand deleted successfully');
+  res.redirect(`/store/${req.params.store}`);
+};

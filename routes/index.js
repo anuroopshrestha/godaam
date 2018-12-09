@@ -57,6 +57,7 @@ router.get('/', homeController.homePage);
 router.post('/store/:id/addbrand', catchErrors(brandController.addBrand));
 router.get('/store/updatebrand/:store/:brand', catchErrors(brandController.editBrandModal));
 router.post('/store/updatebrand/:store/:brand', brandController.saveBrand);
+router.get('/store/deletebrand/:store/:brand', catchErrors(brandController.delBrand));
 
 // STORES
 router.get('/stores', catchErrors(storeController.storesPage));
@@ -78,6 +79,7 @@ router.post(
   catchErrors(categoryController.resizePicture),
   catchErrors(categoryController.saveCategory)
 );
+router.get('/store/deletecat/:store/:cat', catchErrors(categoryController.delCat));
 
 // WAREHOUSES
 router.post('/store/:id/addware', catchErrors(warehouseController.addWarehouse));

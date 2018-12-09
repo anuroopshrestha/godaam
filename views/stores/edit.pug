@@ -59,7 +59,7 @@ block content
                       a.openModal(href=`#` title="Edit" data-url=`/store/updatebrand/${store._id}/${brand._id}`)
                         span.ti-pencil
                     li
-                      a(href=`#` title="Delete")
+                      a(href=`/store/deletebrand/${store._id}/${brand._id}` title="Delete")
                         span.ti-trash
         br
         .card-title Add Brand
@@ -93,7 +93,7 @@ block content
                     a.openModal(href="#" title="Edit" data-url=`/store/updatecat/${store._id}/${category._id}`)
                       span.ti-pencil
                   li
-                    a(href="#" title="Delete")
+                    a(href=`/store/deletecat/${store._id}/${category._id}` title="Delete")
                       span.ti-trash
             td #{category.parent}
       br
@@ -131,7 +131,7 @@ block content
           tr
             th #{i+1}
             th #{warehouse.name}
-            th #{warehouse.location}
+            th #{warehouse.location.address}
       br
       .card-title Add Warehouse
       form.columned(action=`/store/${store._id}/addware` method="POST")
@@ -141,6 +141,12 @@ block content
         .control-row
           label(for="address") Address
           input(type="text" name="location[address]")
+        .control-row
+          label(for="lng") Longitude
+          input#lng(type="text" name="location[coordinates][0]")
+        .control-row
+          label(for="lat") Lattitude
+          input#lat(type="text" name="location[coordinates][1]")
         button.btn.btn-primary Add
   script.
     function initMap() {
