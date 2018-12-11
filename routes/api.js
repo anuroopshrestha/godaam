@@ -6,6 +6,6 @@ const storeController = require('../controllers/storeController');
 
 // API
 router.get('/api/products', productController.sendProducts);
-router.get('/api/brands', storeController.sendStore);
+router.get('/api/brands/:id', storeController.sendStore);
 
 module.exports = router;
