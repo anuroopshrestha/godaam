@@ -84,4 +84,7 @@ router.get('/store/deletecat/:store/:cat', catchErrors(categoryController.delCat
 // WAREHOUSES
 router.post('/store/:id/addware', catchErrors(warehouseController.addWarehouse));
 
+// API
+// router.get('/api/products', productController.sendProducts);
+
 module.exports = router;

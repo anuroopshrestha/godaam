@@ -12,6 +12,7 @@ const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const helpers = require('./helpers');
 const index = require('./routes/index');
+const apiRoutes = require('./routes/api');
 const auth = require('./controllers/authController');
 const userController = require('./controllers/userController');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -66,6 +67,9 @@ app.use(function(req, res, next) {
 app.get('/login', userController.loginForm);
 app.post('/login', auth.login);
 app.get('/logout', auth.logout);
+
+// app.use('/api', apiRoutes);
+app.all('/api/*', apiRoutes);
 
 // Secure all other URLs
 

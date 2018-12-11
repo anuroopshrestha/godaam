@@ -41,3 +41,23 @@ exports.editStorePage = async (req, res) => {
   const users = await userController.getUsers();
   res.render('stores/edit', { title: 'Edit Store', store, users });
 };
+
+exports.sendStore = async (req, res) => {
+  let response = {};
+  try {
+    // data tancha
+    const store = await Store.findOne({ _id: req.params.id });
+    // console.log(store);
+    response = {
+      status: 'success',
+      message: store
+    };
+  } catch (e) {
+    console.log(e);
+    response = {
+      status: 'error',
+      message: e.message
+    };
+  }
+  res.json(response);
+};

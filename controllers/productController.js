@@ -16,3 +16,23 @@ exports.addProduct = async (req, res) => {
   req.flash('error', 'An unexpected error has occured.');
   res.redirect('/products');
 };
+
+exports.sendProducts = async (req, res) => {
+  // console.log('api');
+  let response = {};
+  try {
+    // data tancha
+    const products = { name: 'products' };
+    response = {
+      status: 'success',
+      message: products
+    };
+  } catch (e) {
+    console.log(e);
+    response = {
+      status: 'error',
+      message: e.message
+    };
+  }
+  res.json(response);
+};
