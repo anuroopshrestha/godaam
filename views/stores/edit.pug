@@ -40,17 +40,23 @@ block content
           #map
         br
         button.btn.btn-primary Submit
+  //- Brands
   .card-row.grid-half-half
     .card
         .card-title Brands
         table.lined 
           tr
             th S.No
+            th
             th Name
             th
           each brand, i in store.brands
             tr
               td #{i+1} 
+              td 
+                .category-identifier              
+                  if brand.image
+                    img(src=`/uploads/${store.slug}/${brand.image}`, alt=store.slug)
               td #{brand.name}
               td 
                 span.edit-cell
@@ -63,11 +69,14 @@ block content
                         span.ti-trash
         br
         .card-title Add Brand
-        form.columned(action=`/store/${store._id}/addbrand` method="POST")
+        form.columned(action=`/store/${store._id}/addbrand` method="POST" enctype="multipart/form-data")
           .control-row
             div
-              label Name
+              label(for="name") Name
             input(type="text" name="name")
+          .control-row
+            label(for="image") Image
+            input#image(type="file" name="image")
           button.btn.btn-primary Add Brand
     .card
       .card-title Categories

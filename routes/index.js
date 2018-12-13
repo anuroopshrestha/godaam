@@ -54,9 +54,22 @@ router.get('/', homeController.homePage);
 // router.get('/categories', categoryController.categoriesPage);
 
 // BRANDS
-router.post('/store/:id/addbrand', catchErrors(brandController.addBrand));
+router.post(
+  '/store/:id/addbrand',
+  brandController.uploadBrandImg,
+  brandController.catchUploadErrors,
+  catchErrors(brandController.resizeBrandImg),
+  catchErrors(brandController.addBrand)
+);
+
 router.get('/store/updatebrand/:store/:brand', catchErrors(brandController.editBrandModal));
-router.post('/store/updatebrand/:store/:brand', brandController.saveBrand);
+router.post(
+  '/store/updatebrand/:store/:brand',
+  brandController.uploadBrandImg,
+  brandController.catchUploadErrors,
+  catchErrors(brandController.resizeBrandImg),
+  catchErrors(brandController.saveBrand)
+);
 router.get('/store/deletebrand/:store/:brand', catchErrors(brandController.delBrand));
 
 // STORES

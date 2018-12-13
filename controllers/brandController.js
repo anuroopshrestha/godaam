@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 const Store = mongoose.model('Store');
+const multer = require('multer');
+const sharp = require('sharp');
+const uuid = require('uuid');
+const fs = require('fs');
+const imageHandler = require('../handlers/imageHandler');
 
 exports.addBrand = async (req, res) => {
   await Store.findOneAndUpdate(
@@ -21,6 +26,46 @@ exports.editBrandModal = async (req, res) => {
     return brand._id.equals(req.params.brand);
   });
   res.render('stores/modalForms/editBrand', { title: 'Edit brand', store, brand: selectedBrand[0] });
+};
+
+exports.uploadBrandImg = multer(imageHandler.getMulterOptions({
+  fileSize: 1
+}))
+  .single('image');
+
+exports.catchUploadErrors = (err, req, res, next) => {
+  if (err) {
+    req.flash('error', err.message);
+    res.redirect(`/store/${req.params.store}`);
+  } else {
+    next();
+  }
+};
+
+exports.resizeBrandImg = async (req, res, next) => {
+  console.log('resize', req.body, req.file);
+  if (!req.file) {
+    next();
+    return;
+  }
+
+  const store = await Store.findOne({ _id: req.params.id });
+  // check user temp directory
+  const userDirExists = fs.existsSync(`./public/uploads/${store.slug}`);
+  if (!userDirExists) {
+    fs.mkdirSync(`./public/uploads/${store.slug}`);
+  }
+
+  const photoName = `${uuid.v4()}-${Date.now()}`;
+  const extension = req.file.mimetype.split('/')[1];
+  const imageResize = sharp(req.file.buffer);
+
+  imageResize.resize(250, 250);
+  await imageResize.toFile(`./public/uploads/${store.slug}/${photoName}.${extension}`);
+
+  req.body.image = `${photoName}.${extension}`;
+
+  next();
 };
 
 exports.saveBrand = async (req, res) => {
