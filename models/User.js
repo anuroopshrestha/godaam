@@ -14,10 +14,20 @@ const userSchema = new Schema({
     validate: [{ validator: value => validator.isEmail(value), msg: 'Email already exists.' }],
     required: 'Please supply an Email Address'
   },
+  password: String,
   slug: String,
-  name: {
+  fName: {
     type: String,
-    required: 'Please supply a Name',
+    required: 'First name cannot be empty',
+    trim: true
+  },
+  mName: {
+    type: String,
+    trim: true
+  },
+  lName: {
+    type: String,
+    required: 'Last name cannot be empty',
     trim: true
   },
   role: {

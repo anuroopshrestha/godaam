@@ -5,6 +5,8 @@ const User = mongoose.model('User');
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 
+const LocalStrategy = require('passport-local').Strategy;
+
 passport.initialize();
 passport.use(User.createStrategy());
 
@@ -25,6 +27,18 @@ const strategy = new JwtStrategy(jwtOptions, async function(jwtPayload, done) {
 });
 
 passport.use(strategy);
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ email: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      return done(null, user);
+    });
+  }
+));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());

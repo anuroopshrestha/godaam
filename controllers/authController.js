@@ -68,14 +68,6 @@ exports.apiLogin = (req, res, next) => {
       res.json(response);
       return;
     }
-    if (user.verified.status === 'false') {
-      const response = {
-        status: 'not-verified',
-        message: 'Your email has not been verified yet. Please check your email for verification code'
-      };
-      res.json(response);
-      return;
-    }
     req.user = user;
     next();
   })(req, res, next);
@@ -104,30 +96,21 @@ exports.sendToken = (req, res) => {
   res.json({
     status: 'success',
     token: getToken(req.user),
-    user: {
-      name: req.user.name,
-      email: req.user.email,
-      id: req.user._id,
-      picture: req.user.picture,
-      updated: req.user.verified.profileUpdated,
-      follows: req.user.follows,
-      role: req.user.role,
-      initiateFollows: req.user.verified.initiateFollows,
-      notifications: req.user.notifications
-    }
+    user: req.user
   });
 };
 
 exports.validateApiRegister = (req, res, next) => {
-  req.sanitizeBody('name');
-  req.checkBody('name', 'You must supply a Name').notEmpty();
+  req.sanitizeBody('fName');
+  req.checkBody('fName', 'First name is empty').notEmpty();
+  req.checkBody('lName', 'Last name is empty').notEmpty();
   req.checkBody('email', 'You must supply an email address.').notEmpty();
   req.checkBody('email', 'The Email Address is not valid').isEmail();
   req.checkBody('password', 'Password cannot be blank').notEmpty();
   req.checkBody('password', 'Password must be at least 6 characters long').isLength({min: 6});
   req.checkBody('password', 'Password must contain at least one number').matches(/\d/);
-  req.checkBody('confirm-password', 'Confirmed password cannot be empty').notEmpty();
-  req.checkBody('confirm-password', 'Your passwords do not match').equals(req.body.password);
+  req.checkBody('confirmPassword', 'Confirmed password cannot be empty').notEmpty();
+  req.checkBody('confirmPassword', 'Your passwords do not match').equals(req.body.password);
   const errors = req.validationErrors();
   if (errors) {
     const registerErrors = errors.map(error => error.msg);
