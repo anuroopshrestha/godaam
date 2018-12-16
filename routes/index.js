@@ -55,7 +55,7 @@ router.get('/', homeController.homePage);
 
 // BRANDS
 router.post(
-  '/store/:id/addbrand',
+  '/store/:store/addbrand',
   brandController.uploadBrandImg,
   brandController.catchUploadErrors,
   catchErrors(brandController.resizeBrandImg),
@@ -80,6 +80,7 @@ router.get('/store/:id', catchErrors(storeController.editStorePage));
 
 // PRODUCTS
 router.get('/products', catchErrors(productController.productsPage));
+router.get('/products/new', catchErrors(productController.addProductPage));
 router.post('/products', catchErrors(productController.addProduct));
 
 // CATEGORIES

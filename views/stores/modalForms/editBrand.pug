@@ -1,6 +1,11 @@
 .modal-content
-  form.stacked(action=`/store/updatebrand/${store._id}/${brand._id}` method="POST")
+  .modal-title
+    h3 #{title}
+  form.columned(action=`/store/updatebrand/${store._id}/${brand._id}` method="POST" enctype="multipart/form-data")
     .control-row
       label(for="name") Name
       input#name(type="text" name="name" value=brand.name)
+    .control-row
+      label(for="image") Image
+      input#image(type="file" name="image")
     button.btn-btn-primary Save

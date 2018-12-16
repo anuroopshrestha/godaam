@@ -2,10 +2,17 @@ const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const Store = mongoose.model('Store');
 
+const userController = require('./userController');
+
 exports.productsPage = async (req, res) => {
   const stores = await Store.find();
   // res.json(stores);
   res.render('products/all', {title: 'Products'});
+};
+
+exports.addProductPage = async (req, res) => {
+  const users = await userController.getUsers();
+  res.render('products/new', {title: 'Add New Product', users});
 };
 
 exports.addProduct = async (req, res) => {

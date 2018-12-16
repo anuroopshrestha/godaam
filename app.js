@@ -13,6 +13,7 @@ const flash = require('connect-flash');
 const helpers = require('./helpers');
 const index = require('./routes/index');
 const apiRoutes = require('./routes/api');
+const authRoutes = require('./routes/auth');
 const auth = require('./controllers/authController');
 const userController = require('./controllers/userController');
 const errorHandlers = require('./handlers/errorHandlers');
@@ -69,6 +70,7 @@ app.post('/login', auth.login);
 app.get('/logout', auth.logout);
 
 // app.use('/api', apiRoutes);
+app.all('/auth/*', authRoutes);
 app.all('/api/*', apiRoutes);
 
 // Secure all other URLs

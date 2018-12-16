@@ -1,0 +1,37 @@
+extends ../layout
+
+block content
+  .page-title
+    h1 Products
+  .card-row.grid-aside
+    .card
+      .card-title All Products
+        table.striped
+        
+    .card
+      .card-title Add New
+      ._main
+        form.stacked(action="/products" method="POST")
+          .control-row
+            label(for="name") Name
+            input#name(type="text" name="name")
+          .control-row
+            label(for="sku") SKU
+            input(type="text" name="SKU")
+          .control-row
+            label(for="category") Category
+            input(type="text" name="category")
+          .control-row
+            label(for="stock") Stock
+            input(type="number" name="stock")
+          //- .control-row
+          //-   label(for="Address") Address
+          //-   input(type="text" name="location[address]")
+          .control-row
+            label(for="price") Price
+            input(type="number" name="price")
+          //- .control-row
+          //-   select#prodBrand(name="brand")
+          //-     option(value="0") --Select Brand
+          .control-row  
+            button.btn.btn-primary Submit        

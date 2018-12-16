@@ -17,7 +17,7 @@ exports.addBrand = async (req, res) => {
     { new: true, runValidators: true }
   );
   req.flash('success', 'Brand has been added successfully');
-  res.redirect(`/store/${req.params.id}`);
+  res.redirect(`/store/${req.params.store}`);
 };
 
 exports.editBrandModal = async (req, res) => {
@@ -49,7 +49,7 @@ exports.resizeBrandImg = async (req, res, next) => {
     return;
   }
 
-  const store = await Store.findOne({ _id: req.params.id });
+  const store = await Store.findOne({ _id: req.params.store });
   // check user temp directory
   const userDirExists = fs.existsSync(`./public/uploads/${store.slug}`);
   if (!userDirExists) {
@@ -71,7 +71,12 @@ exports.resizeBrandImg = async (req, res, next) => {
 exports.saveBrand = async (req, res) => {
   await Store.findOneAndUpdate(
     { _id: req.params.store, 'brands._id': req.params.brand },
-    { $set: { 'brands.$.name': req.body.name } }
+    {
+      $set: {
+        'brands.$.name': req.body.name,
+        'brands.$.image': req.body.image
+      }
+    }
   );
   req.flash('success', 'Brand updated successfully');
   res.redirect(`/store/${req.params.store}`);

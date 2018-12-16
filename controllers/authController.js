@@ -117,3 +117,59 @@ exports.sendToken = (req, res) => {
     }
   });
 };
+
+exports.validateApiRegister = (req, res, next) => {
+  req.sanitizeBody('name');
+  req.checkBody('name', 'You must supply a Name').notEmpty();
+  req.checkBody('email', 'You must supply an email address.').notEmpty();
+  req.checkBody('email', 'The Email Address is not valid').isEmail();
+  req.checkBody('password', 'Password cannot be blank').notEmpty();
+  req.checkBody('password', 'Password must be at least 6 characters long').isLength({min: 6});
+  req.checkBody('password', 'Password must contain at least one number').matches(/\d/);
+  req.checkBody('confirm-password', 'Confirmed password cannot be empty').notEmpty();
+  req.checkBody('confirm-password', 'Your passwords do not match').equals(req.body.password);
+  const errors = req.validationErrors();
+  if (errors) {
+    const registerErrors = errors.map(error => error.msg);
+    const response = {
+      status: 'validate-error',
+      message: registerErrors
+    };
+    res.json(response);
+    return; // stop the fn from running
+  }
+  next();
+};
+
+exports.apiRegister = async(req, res) => {
+  try {
+    const verificationCode = Math.floor(Math.random() * (999999 - 100000) + 100000);
+    req.body.role = 30;
+    req.body.verified = {
+      status: 'false',
+      profileUpdated: 'false',
+      verificationCode,
+      initiateFollows: 'false'
+    };
+    const user = new User(req.body);
+    await User.registerAsync(user, req.body.password);
+    // mail.send({
+    //   user,
+    //   filename: 'email-verification',
+    //   subject: 'Verify your email',
+    //   code: verificationCode
+    // });
+    const response = {
+      status: 'success',
+      message: 'Please check your email for verification.'
+    };
+    res.json(response);
+  } catch (e) {
+    console.log(e);
+    const response = {
+      status: 'error',
+      message: e.message
+    };
+    res.json(response);
+  }
+};
